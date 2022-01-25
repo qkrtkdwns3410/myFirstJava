@@ -1,0 +1,56 @@
+package test.doit;
+
+/**
+ * packageName    : test.doit
+ * fileName       : HashCodeTest
+ * author         : letscombine
+ * date           : 2022-01-19
+ * description    :
+ * ===========================================================
+ * DATE              AUTHOR             NOTE
+ * -----------------------------------------------------------
+ * 2022-01-19        letscombine       최초 생성
+ */
+
+
+public class HashCodeTest {
+      public static void main(String[] args) {
+            String str1 = new String("abc");
+            String str2 = new String("abc");
+            System.out.println(str1.hashCode());
+            System.out.println(str2.hashCode());
+
+            Integer i1 = new Integer(100);
+            Integer i2 = new Integer(200);
+
+            System.out.println(i1.hashCode());
+            System.out.println(i2.hashCode());
+      }
+}
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
