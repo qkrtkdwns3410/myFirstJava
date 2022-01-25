@@ -1,7 +1,6 @@
 package test.exercise.testmeplz2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 /**
@@ -18,7 +17,8 @@ import java.util.Arrays;
 
 
 public class Student {
-      private static int studentID = 1000; //학번
+      private static int studentSerialID = 1000; //학번
+      private int studentID;
       private String studentName; //학생이름
       private Subject majorSubject; //학생 필수 과목 하나!
 
@@ -30,17 +30,17 @@ public class Student {
       }
 
       public Student(String studentName, Subject majorSubject) {
-            studentID++;
+            this.studentID = studentSerialID++;
             this.studentName = studentName;
             this.majorSubject = majorSubject;
       }
 
       public int getStudentID() {
-            return studentID;
+            return studentSerialID;
       }
 
       public void setStudentID(int studentID) {
-            Student.studentID = studentID;
+            Student.studentSerialID = studentID;
       }
 
       public String getStudentName() {
@@ -67,37 +67,6 @@ public class Student {
             this.scoreList = scoreList;
       }
 
-      public Student  enrollStudent() {
-
-            System.out.println("========================");
-
-            System.out.println("학생이름 입력");
-            String studentInputName = Util.sc.nextLine();
-
-            System.out.println("학생 번호 입력");
-            int studentInputID = Integer.parseInt(Util.sc.nextLine());
-
-
-            System.out.println("========================");
-            System.out.println("선택가능한 과목");
-
-            for (int i = 0; i < School.getInstance().getSubjectList().size(); i++) {
-                  System.out.println(School.getInstance().getSubjectList().get(i));
-            }
-            System.out.println("========================");
-            System.out.println("필수 과목 입력 (숫자로 입력해주세요)");
-
-            int getOne = Integer.parseInt(Util.sc.nextLine());
-
-            Student std = new Student(studentInputName, School.getInstance().getSubjectList().get(getOne));
-
-            System.out.println("학생이 생성되었습니다");
-            System.out.println("std = " + std);
-
-            System.out.println("========================");
-            return std;
-      }
-
       public void addSubjectScore(Score score) {
             scoreList.add(score);
 
@@ -109,7 +78,7 @@ public class Student {
 
       @Override
       public String toString() {
-            return "Student{" + "studentName='" + studentName + '\'' + ", majorSubject=" + majorSubject + ", scoreList=" + Arrays.toString(scoreList.toArray()) + '}';
+            return "Student{" + "studentName='" + studentName + '\'' + ", majorSubject=" + majorSubject +'}';
       }
 }
 

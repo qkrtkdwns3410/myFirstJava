@@ -52,8 +52,10 @@ public class GenerateGradeReport {
             for (int i = 0; i < studentList.size(); i++) {
                   Student student = studentList.get(i);
                   System.out.println("student = " + student);
+
                   System.out.println("========================");
-                  System.out.println("아 왜안됌???");
+                  System.out.println("아 왜 안됌???");
+
                   buffer.append(student.getStudentName()).append(" | ").append(student.getStudentID()).append(" | ")
                           .append(student.getMajorSubject().getSubjectName()).append("\t").append(" | ");
 

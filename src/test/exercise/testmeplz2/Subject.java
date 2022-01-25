@@ -67,9 +67,14 @@ public class Subject {
 
       }
 
+      public void removeOneStudent(int index) {
+            studentList.remove(index);
+            System.out.println("지웟음 ..");
+      }
+
       @Override
       public String toString() {
-            return "Subject{" + "subjectName='" + subjectName + '\'' + ", subjectId=" + subjectId + ", gradeType=" + gradeType + ", studentList=" + Arrays.toString(studentList.toArray()) + '}';
+            return "Subject{" + "subjectName='" + subjectName + '\'' + ", subjectId=" + subjectId + ", gradeType=" + gradeType + '}';
       }
 }
 
