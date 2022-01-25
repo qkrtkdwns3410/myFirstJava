@@ -26,7 +26,6 @@ public class Student {
 
       public Student() {
             this("이름없음", null);
-
       }
 
       public Student(String studentName, Subject majorSubject) {
@@ -40,7 +39,7 @@ public class Student {
       }
 
       public void setStudentID(int studentID) {
-            Student.studentSerialID = studentID;
+            this.studentID = studentID;
       }
 
       public String getStudentName() {

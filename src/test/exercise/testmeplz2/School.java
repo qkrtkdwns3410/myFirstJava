@@ -139,7 +139,6 @@ public class School {
                         switch (manageNum) {
                               case 1:
                                     try {
-                                          System.out.println("case 1 ");
                                           System.out.println("학생 이름 입력");
                                           String name = sc.nextLine();
 
@@ -158,14 +157,24 @@ public class School {
 
                                           int getOne = Integer.parseInt(Util.sc.nextLine());
 
+                                          if (School.getInstance().getSubjectList().size() <= getOne) {
+                                                System.out.println("======================================================");
+                                                System.out.println("그런 번호는 없습니다만");
+                                                System.out.println("======================================================");
+                                                break;
+                                          }
                                           instance.addStudent(new Student(name, School.getInstance().getSubjectList()
                                                   .get(getOne)));
+
 
                                           break;
                                     } catch (NumberFormatException e) {
                                           System.out.println("잘못된 값을 눌렀자나..");
-                                          e.printStackTrace();
+                                    } catch (IndexOutOfBoundsException e1) {
+                                          System.out.println("없는 값을 호출했습니다");
+
                                     }
+
                               case 2:
                                     try {
                                           System.out.println(" 1 - case2");
@@ -239,6 +248,10 @@ public class School {
                                     } catch (NumberFormatException e) {
                                           System.out.println("잘못된 값을 눌렀자나..");
                                           e.printStackTrace();
+                                    } catch (IndexOutOfBoundsException e1) {
+                                          System.out.println("해당 번호는 없습니다만..");
+                                    } catch (Exception e) {
+                                          System.out.println("예상치 못한 예외발생?");
                                     }
                               case 4:
                                     try {
@@ -264,13 +277,13 @@ public class School {
                                     System.out.println("등록할 과목 이름 입력");
                                     String name = sc.nextLine();
 
-                                    showSubjectInfo();
-
                                     System.out.println("등록할 과목의 아이디 입력");
                                     int getOne = Integer.parseInt(sc.nextLine());
 
-                                    for (int i = 0; i < subjectList.size(); i++) {
-
+                                    for (Subject subject : subjectList) {
+                                          if (subject.getSubjectId() == getOne) {
+                                                throw new AlreadyExisted("이미 존재하는 값입니다");
+                                          }
                                     }
 
                                     System.out.println("========================");
@@ -288,6 +301,8 @@ public class School {
 
                               } catch (IllegalArgumentException e) {
                                     System.out.println("못찾았다..");
+                              } catch (AlreadyExisted ignored) {
+
                               }
 
                         } else if (manageNum == 2) {
@@ -328,9 +343,16 @@ public class School {
                                     int numOfGradeType = Integer.parseInt(sc.nextLine());
 
 
-                                    instance.modifySubject(new Subject(modifiedSubjectName, modifiedSubejctNum, GradeType.find(numOfGradeType)),numOfGradeType);
+                                    instance.modifySubject(new Subject(modifiedSubjectName, modifiedSubejctNum, GradeType.find(numOfGradeType)), numOfGradeType);
                               } catch (NumberFormatException e) {
                                     System.out.println("올바른 값을 입력하세요");
+                              } catch (IllegalArgumentException e1) {
+                                    System.out.println("올바른 평가 방식으로..");
+
+                              } catch (Exception e) {
+                                    e.printStackTrace();
+                                    System.out.println("에러발생");
+
                               }
                         } else if (manageNum == 3) {
                               try {
@@ -361,6 +383,7 @@ public class School {
                                     try {
                                           System.out.println("성적을 입력합니다");
                                           System.out.println("========================");
+
                                           if (!showStudentInfo()) {
                                                 System.out.println("등록된 학생이 없습니다.");
                                                 System.out.println();
@@ -376,7 +399,7 @@ public class School {
                                           if (!(numOfScoredStudent >= 0 && numOfScoredStudent < studentList.size())) {
                                                 System.out.println("잘못된 번호의 입력");
                                                 System.out.println();
-                                                System.out.println("");
+                                                System.out.println("======================================================");
                                           }
 
                                           System.out.println("========================");
@@ -388,15 +411,20 @@ public class School {
 
                                           System.out.println("점수 입력");
                                           int pointOfSubject = Integer.parseInt(sc.nextLine());
+                                          if (pointOfSubject < 0 || pointOfSubject > 100) {
+                                                System.out.println("올바른 점수를 입력 부탁");
+                                                break;
+                                          }
                                           System.out.println("========================");
 
                                           addScoreForStudent(instance.studentList.get(numOfScoredStudent), subjectList.get(numOfScoredSubject), pointOfSubject);
+
                                           System.out.println("성적 등록 메서드입니다");
 
                                           System.out.println("처리되었습니다.");
                                           break;
                                     } catch (NumberFormatException e) {
-                                          e.printStackTrace();
+                                          System.out.println("올바른 값을 입력하세요");
                                     }
 
                               case 2:
@@ -423,6 +451,10 @@ public class School {
 
                                           System.out.println("점수 입력");
                                           int pointOfSubject2 = Integer.parseInt(sc.nextLine());
+                                          if (pointOfSubject2 < 0 || pointOfSubject2 > 100) {
+                                                System.out.println("0~100까지만..");
+                                                break;
+                                          }
                                           System.out.println("========================");
 
                                           modifyScoreForStudent(studentList.get(numOfScoredStudent2), subjectList.get(numOfScoredSubject2), pointOfSubject2);
@@ -486,6 +518,8 @@ public class School {
                   System.out.println("index = " + index);
                   System.out.println("======================================================");
                   subject.removeOneStudent(index);
+            } catch (IndexOutOfBoundsException ignored) {
+
             } catch (Exception e) {
                   e.printStackTrace();
             }
@@ -516,8 +550,13 @@ public class School {
             System.out.println("========================");
             while (true) {
 
-                  System.out.println("1. 학생 관리 2. 과목 관리 3. 성적 관리 4. 리포팅(출력) 5. 프로그램 종료");
-                  int btnNum = Integer.parseInt(sc.nextLine());
+                  int btnNum = 0;
+                  try {
+                        System.out.println("1. 학생 관리 2. 과목 관리 3. 성적 관리 4. 리포팅(출력) 5. 프로그램 종료");
+                        btnNum = Integer.parseInt(sc.nextLine());
+                  } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                  }
                   switch (btnNum) {
                         case 1:
                         case 2:
