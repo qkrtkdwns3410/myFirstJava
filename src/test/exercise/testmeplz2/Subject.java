@@ -23,7 +23,7 @@ public class Subject {
 
       ArrayList<Student> studentList = new ArrayList<>();
 
-      public Subject(String subjectName, int subjectId, int gradeType) {
+      public Subject(String subjectName, int subjectId, GradeType gradeType) {
             this.subjectName = subjectName;
             this.subjectId = subjectId;
             this.gradeType = GradeType.AB_TYPE;
@@ -64,6 +64,17 @@ public class Subject {
       public void register(Student student) {
             studentList.add(student);
 
+      }
+
+      @Override
+      public String toString() {
+            final StringBuilder sb = new StringBuilder("Subject{");
+            sb.append("subjectName='").append(subjectName).append('\'');
+            sb.append(", subjectId=").append(subjectId);
+            sb.append(", gradeType=").append(gradeType);
+            sb.append(", studentList=").append(studentList);
+            sb.append('}');
+            return sb.toString();
       }
 }
 
