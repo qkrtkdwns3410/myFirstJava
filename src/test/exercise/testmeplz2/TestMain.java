@@ -25,14 +25,13 @@ public class TestMain {
 
       public static void main(String[] args) {
             TestMain test = new TestMain();
-            String report = test.report.getReport();
-            System.out.println("report = " + report);
+
             School.getInstance().mainLogic();
       }
 
       public void createSubject() {
-            korean = new Subject("국어", korean.getSubjectId(), GradeType.AB_TYPE);
-            math = new Subject("수학", math.getSubjectId(), GradeType.AB_TYPE);
+            korean = new Subject("국어",1000 , GradeType.AB_TYPE);
+            math = new Subject("수학", 1001, GradeType.AB_TYPE);
 
             School.getInstance().addSubject(korean);
             School.getInstance().addSubject(math);
@@ -74,12 +73,6 @@ public class TestMain {
             School.getInstance().addScoreForStudent(std4, math, 95);
             School.getInstance().addScoreForStudent(std5, korean, 95);
             School.getInstance().addScoreForStudent(std5, math, 95);
-
-
-
-
-
-
       }
 
 }

@@ -28,12 +28,14 @@ public class GenerateGradeReport {
 
       public String getReport() {
             ArrayList<Subject> subjectList = school.getSubjectList();
-
+            System.out.println("subjectList = " + subjectList);
+            System.out.println("========================");
             for (Subject subject : subjectList) {
                   makeHeader(subject);
                   makeBody(subject);
                   makeFooter();
             }
+            System.out.println("========================");
             return buffer.toString();
       }
 
@@ -44,10 +46,14 @@ public class GenerateGradeReport {
       }
 
       public void makeBody(Subject subject) {
-            ArrayList<Student> studentList = new ArrayList<>();
+            ArrayList<Student> studentList = subject.getStudentList();
+            System.out.println("studentList = " + studentList);
 
             for (int i = 0; i < studentList.size(); i++) {
                   Student student = studentList.get(i);
+                  System.out.println("student = " + student);
+                  System.out.println("========================");
+                  System.out.println("아 왜안됌???");
                   buffer.append(student.getStudentName()).append(" | ").append(student.getStudentID()).append(" | ")
                           .append(student.getMajorSubject().getSubjectName()).append("\t").append(" | ");
 
@@ -66,13 +72,17 @@ public class GenerateGradeReport {
 
             for (int i = 0; i < scoreList.size(); i++) {
                   Score score = scoreList.get(i);
+
                   if (score.getSubject().getSubjectId() == subjectId) { // 학점 산출할 과목
+
                         String grade;
+
                         if (score.getSubject().getSubjectId() == majorId) {
                               grade = gradeEvaluations[Define.SAB_TYPE].getGrade(score.getPoint());
                         } else {
                               grade = gradeEvaluations[Define.AB_TYPE].getGrade(score.getPoint());
                         }
+
                         buffer.append(score.getPoint());
                         buffer.append(" : ");
                         buffer.append(grade);

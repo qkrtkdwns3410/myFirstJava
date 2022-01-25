@@ -1,7 +1,9 @@
 package test.exercise.testmeplz2;
 
 import java.lang.reflect.Field;
+import java.net.SocketOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static test.exercise.testmeplz2.Util.sc;
 
@@ -107,7 +109,7 @@ public class School {
             System.out.println("School.goManage");
 
             Field[] fields = DefineType.class.getFields();
-            System.out.println("fields = " + fields);
+            System.out.println("fields = " + Arrays.toString(fields));
             System.out.println("========================");
 
             while (true) {
@@ -319,10 +321,15 @@ public class School {
                                     System.out.println("성적을 입력합니다");
                                     System.out.println("========================");
                                     if (!showStudentInfo()) {
-
+                                          System.out.println("등록된 학생이 없습니다.");
+                                          System.out.println();
+                                          System.out.println("메인으로 돌아갑니다.");
+                                          School.getInstance().mainLogic();
                                     }
-                              System.out.println("========================");
-                              System.out.println("성적을 입력할 학생을 선택해주세요");
+
+                                    System.out.println("========================");
+                                    System.out.println("성적을 입력할 학생을 선택해주세요");
+
                               int numOfScoredStudent = Integer.parseInt(sc.nextLine());
 
                               if (!(numOfScoredStudent >= 0 && numOfScoredStudent < studentList.size())) {
@@ -398,7 +405,7 @@ public class School {
 
                         }
 
-                  } else {
+                  }                  else {
                         System.out.println("처음으로 돌아갑니다");
                         System.out.println("========================");
                         mainLogic();
@@ -409,8 +416,18 @@ public class School {
       }
 
       public void addScoreForStudent(Student student, Subject subject, int point) {
-
+            System.out.println("체크체크");
+            System.out.println("student = " + student);
+            System.out.println("subject = " + subject);
+            System.out.println("point = " + point);
+            System.out.println("체크체크");
+            System.out.println("========================");
+            subject.register(student);
             Score score = new Score(student.getStudentID(), subject, point);
+
+            //성적 등록시 자동 수강신청으로 생각하겠습니다.
+
+
             student.addSubjectScore(score);
       }
 
@@ -433,7 +450,8 @@ public class School {
 
       public void mainLogic() {
             System.out.println("========================");
-            System.out.println("       학점 프로그램 v 1.0");
+            System.out.print("□□□■□□□□■■□□■■■■■■■□□■□□□□□■■■■■■□□■□□□■■■■■■□□□■□□□□□□□□□□□□□□□□□□□■■■■■■■■□□□□□□□□□□□□□□□■■■■■□■□□■\n" + "□■■■■■■■□■■□□□□□■□□□□□■□□□□□■■■■■■□□■□□□■■■■■■□□□■□□□□□□□■■■■■■■■■□□□□□□□□□□■□□□■■■■■■■■■■□□□□□■■□■□□■\n" + "□□■■■■■□□■■□□□□□■□□□□□■□□□□□□□□□□■□□■□□□□□□□□■□□□■□□□□□□□□□■□□□■□□□□□□□□□□□□■□□□□□□□□□□□■■□□□□□■■□■■■■\n" + "□■■■□■■□□■■■■□□■■■□■■■■□□□□□□□■□□■□□■■■□□□□□□■□□□■□□□□□□□□□■□□□■□□□□□■■■■■■■■□□□□□□□□□□□■■□□■■■■■□■■■■\n" + "□■■□□□■■□■■□□□■■■■■□□□■□□□□□□□■□■■□□■■■□■■■■■■□□□■□□□□□□□□□■□□□■□□□□□■■□□□□□□□□□□□□□□□□□■■□□■□□□□□■□□■\n" + "□■■□□■■■□■■□■■■□□■■■□□■□□□□□□□■■■■■■■□□□■□□□□□□□□■□□□□□□□□□■□□□■□□□□□■■□□□□□□□□□□□□□□□□□■□□□■■■■■■■□□■\n" + "□□■■■■■□□■■□■■□□□□□□□□■□□□□■■■■■■■■■■□□□■□□□□□□□□■□□□□□□□■■■■■■■■■□□□■■■■■■■■■□□□□□□□□□□■□□□■■■□□□■□□■\n" + "□□□□□□□□□□■□□□□■■■■■■■■□□□□□□□□□□□□□■□□□■□□□□□□□□■□□□□□□□□□□□□□□□□□□□□□□■■□□□□□□□□□□□□□□■□□□□□■■■■■■■■\n" + "□□■■■■■■■■■□□□□■□□□□□□■□□□□□□■□□□□□□■□□□■■■■■■■■□■□□□□□□□□□□□□□□□□□□□□□□■■□□□□□□□□□□□□□□□□□□□□■□□□□□□■\n" + "□□□□□□□□□□■□□□□■□□□□□□■□□□□□□■□□□□□□□□□□□□□□□□□□□■□□□□□■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■□□□■□□□□□□■\n" + "□□□□□□□□□□■□□□□■□□□□□□■□□□□□□■□□□□□□□□□□□□□□□□□□□■□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□■□□□□□□■\n" + "□□□□□□□□□□■□□□□■■■■■■■■□□□□□□■■■■■■■■■□□□□□□□□□□□■□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□■■■■■■■■");
+
             System.out.println("========================");
             while (true) {
 
@@ -446,17 +464,27 @@ public class School {
                               School.getInstance().goManage(btnNum);
                               break;
                         case 4:
-                              GenerateGradeReport generateGradeReport = new GenerateGradeReport(); //출력 메서드
-                              generateGradeReport.getReport();
-                              System.out.println("리포트 만듬");
-                              break;
+                              try {
+                                    GenerateGradeReport generateGradeReport = new GenerateGradeReport(); //출력 메서드
+                                    System.out.println(generateGradeReport.getReport());
+                                    System.out.println("리포트 만듬");
+                                    break;
+                              } catch (Exception ignored) {
+
+                              }
+
                         case 5:
                               System.out.println("프로그램이 종료됩니다");
                               return;
+                        case 6:
+                              System.out.print("⠄⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣴⣶⣶⣶⣶⣦⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" + "⠀⠀⠀⠀⠀⠀⣀⣤⣾⣿⡿⠿⠛⠛⠛⠛⠛⠛⠻⢿⣿⣿⣦⣄⠀⠀⠀⠀⠀⠀\n" + "⠀⠀⠀⠀⢠⣼⣿⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠿⣿⣷⣄⠀⠀⠀⠀\n" + "⠀⠀⠀⣰⣿⡿⠋⠀⠀⠀⠀⠀⣿⡇⠀⢸⣿⡇⠀⠀⠀⠀⠀⠈⢿⣿⣦⡀⠀⠀\n" + "⠀⠀⣸⣿⡿⠀⠀⠀⠸⠿⣿⣿⣿⡿⠿⠿⣿⣿⣿⣶⣄⠀⠀⠀⠀⢹⣿⣷⠀⠀\n" + "⠀⢠⣿⡿⠁⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠈⣿⣿⣿⠀⠀⠀⠀⠀⢹⣿⣧⠀\n" + "⠀⣾⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⢀⣠⣿⣿⠟⠀⠀⠀⠀⠀⠈⣿⣿⠀\n" + "⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⣿⡿⠿⠿⠿⣿⣿⣥⣄⠀⠀⠀⠀⠀⠀⣿⣿⠀\n" + "⠀⢿⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⢻⣿⣿⣧⠀⠀⠀⠀⢀⣿⣿⠀\n" + "⠀⠘⣿⣷⡀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⣼⣿⣿⡿⠀⠀⠀⠀⣸⣿⡟⠀\n" + "⠀⠀⢹⣿⣷⡀⠀⠀⢰⣶⣿⣿⣿⣷⣶⣶⣾⣿⣿⠿⠛⠁⠀⠀⠀⣸⣿⡿⠀⠀\n" + "⠀⠀⠀⠹⣿⣷⣄⠀⠀⠀⠀⠀⣿⡇⠀⢸⣿⡇⠀⠀⠀⠀⠀⢀⣾⣿⠟⠁⠀⠀\n" + "⠀⠀⠀⠀⠘⢻⣿⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾⣿⡿⠋⠀⠀⠀⠀\n" + "⠀⠀⠀⠀⠀⠀⠈⠛⢿⣿⣷⣶⣤⣤⣤⣤⣤⣤⣴⣾⣿⣿⠟⠋⠀⠀⠀⠀⠀⠀\n" + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠻⠿⠿⠿⠿⠟⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                              System.out.println();
+                              break;
                         default:
                               System.out.println("잘못된 입력입니다");
                               break;
                   }
+
                   //넘버 클릭
             }
             //여기에서 다른 번호나 키 누르면 예외처리 잘 해줘야합니다

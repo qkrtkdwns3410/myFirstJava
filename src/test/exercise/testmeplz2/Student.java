@@ -1,6 +1,7 @@
 package test.exercise.testmeplz2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -108,12 +109,7 @@ public class Student {
 
       @Override
       public String toString() {
-            final StringBuilder sb = new StringBuilder("Student{");
-            sb.append("studentName='").append(studentName).append('\'');
-            sb.append(", majorSubject=").append(majorSubject);
-            sb.append(", scoreList=").append(scoreList);
-            sb.append('}');
-            return sb.toString();
+            return "Student{" + "studentName='" + studentName + '\'' + ", majorSubject=" + majorSubject + ", scoreList=" + Arrays.toString(scoreList.toArray()) + '}';
       }
 }
 
