@@ -50,12 +50,7 @@ public class Score {
 
       @Override
       public String toString() {
-            final StringBuilder sb = new StringBuilder("Score{");
-            sb.append("studentId=").append(studentId);
-            sb.append(", subject=").append(subject);
-            sb.append(", point=").append(point);
-            sb.append('}');
-            return sb.toString();
+            return "학생이름=" + studentId + ", 과목=" + subject + ", 점수=" + point + '}';
       }
 }
 

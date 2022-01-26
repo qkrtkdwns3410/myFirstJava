@@ -77,7 +77,7 @@ public class Student {
 
       @Override
       public String toString() {
-            return "Student{" + "studentName='" + studentName + '\'' + ", majorSubject=" + majorSubject +'}';
+            return "학생 이름 = " + studentName + majorSubject;
       }
 }
 

@@ -13,8 +13,8 @@ package test.exercise.testmeplz2;
  */
 
 
-public class AlreadyExisted extends Exception {
-      public AlreadyExisted(String message) {
+public class AlreadyExistedException extends Exception {
+      public AlreadyExistedException(String message) {
             super(message);
       }
 }

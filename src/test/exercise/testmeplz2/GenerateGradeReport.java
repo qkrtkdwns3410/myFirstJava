@@ -1,5 +1,6 @@
 package test.exercise.testmeplz2;
 
+import javafx.scene.shape.StrokeLineCap;
 import test.exercise.testmeplz.Define;
 
 import java.util.ArrayList;
@@ -19,23 +20,30 @@ import java.util.ArrayList;
 
 
 public class GenerateGradeReport {
-      public static final String TITLE = " 수강생 학점 \t\t\n";
-      public static final String HEADER = "이름 | 학번 |필수과목| 점수 \n";
+      public static final String TITLE = " 과목 수강생 학점 \t\t\n";
+      public static final String TITLE_FOR_STUDENT = "' 학생 학점표\t\t\n";
+      public static final String HEADER = "이름 | 학번 | 점수(등급) \n";
+      public static final String HEADER_FOR_STUDENT = "과목명 | 과목번호 | 점수(등급) \n";
       public static final String LINE = "--------------------------------------\n";
 
-      School school = School.getInstance();
-      private StringBuffer buffer = new StringBuffer();
+      private School school = School.getInstance();
+
+      private final StringBuffer buffer = new StringBuffer();
 
       public String getReport() {
+
             ArrayList<Subject> subjectList = school.getSubjectList();
-            System.out.println("subjectList = " + subjectList);
-            System.out.println("========================");
+
+            if (subjectList.size() == 0) {
+                  System.out.println("리스트에 자료가 없습니다");
+                  return "";
+            }
+
             for (Subject subject : subjectList) {
                   makeHeader(subject);
                   makeBody(subject);
                   makeFooter();
             }
-            System.out.println("========================");
             return buffer.toString();
       }
 
@@ -47,17 +55,13 @@ public class GenerateGradeReport {
 
       public void makeBody(Subject subject) {
             ArrayList<Student> studentList = subject.getStudentList();
-            System.out.println("studentList = " + studentList);
 
             for (int i = 0; i < studentList.size(); i++) {
                   Student student = studentList.get(i);
-                  System.out.println("student = " + student);
 
                   System.out.println("========================");
-                  System.out.println("아 왜 안됌???");
 
-                  buffer.append(student.getStudentName()).append(" | ").append(student.getStudentID()).append(" | ")
-                          .append(student.getMajorSubject().getSubjectName()).append("\t").append(" | ");
+                  buffer.append(student.getStudentName()).append(" | ").append(student.getStudentID()).append(" | ");
 
                   getScoreGrade(student, subject.getSubjectId());
 
@@ -72,9 +76,7 @@ public class GenerateGradeReport {
 
             GradeEvaluation[] gradeEvaluations = {new BasicEvaluation(), new MajorEvaluation()};
 
-            for (int i = 0; i < scoreList.size(); i++) {
-                  Score score = scoreList.get(i);
-
+            for (Score score : scoreList) {
                   if (score.getSubject().getSubjectId() == subjectId) { // 학점 산출할 과목
 
                         String grade;
@@ -96,6 +98,49 @@ public class GenerateGradeReport {
       public void makeFooter() {
             buffer.append("\n");
       }
+
+      public String getReportGroupbyStudent() {
+            ArrayList<Student> studentList = school.getStudentList();
+
+            if (studentList.size() == 0) {
+                  System.out.println("리스트에 자료가 없습니다");
+                  return "";
+            }
+
+            for (Student student : studentList) {
+                  makeHeaderForStudent(student);
+                  makeBodyForStudent(student);
+                  makeFooter();
+            }
+            return buffer.toString();
+
+      }
+
+      private void makeHeaderForStudent(Student student) {
+            buffer.append(GenerateGradeReport.LINE + "\t").append(student.getStudentName())
+                    .append(GenerateGradeReport.TITLE_FOR_STUDENT).append(GenerateGradeReport.HEADER_FOR_STUDENT)
+                    .append(GenerateGradeReport.LINE);
+      }
+
+      private void makeBodyForStudent(Student student) {
+            ArrayList<Score> scoreList = student.getScoreList();
+
+            for (int index = 0; index < scoreList.size(); index++) {
+                  Score score = scoreList.get(index);
+
+                  System.out.println("======================================================");
+
+                  buffer.append(score.getSubject().getSubjectName()).append(" | ")
+                          .append(score.getSubject().getSubjectId()).append(" | ");
+
+                  getScoreGrade(student, score.getSubject().getSubjectId());
+
+                  buffer.append("\n");
+                  buffer.append(LINE);
+            }
+      }
+
+
 
 }
 

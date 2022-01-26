@@ -1,7 +1,6 @@
 package test.exercise.testmeplz2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 /**
@@ -18,11 +17,10 @@ import java.util.Arrays;
 
 
 public class Subject {
+      ArrayList<Student> studentList = new ArrayList<>();
       private String subjectName; //과목이름
       private int subjectId; //과목의 고유 번호
       private GradeType gradeType; //학점 등급 산출
-
-      ArrayList<Student> studentList = new ArrayList<>();
 
       public Subject(String subjectName, int subjectId, GradeType gradeType) {
             this.subjectName = subjectName;
@@ -69,12 +67,17 @@ public class Subject {
 
       public void removeOneStudent(int index) {
             studentList.remove(index);
-            System.out.println("지웟음 ..");
       }
 
       @Override
       public String toString() {
-            return "Subject{" + "subjectName='" + subjectName + '\'' + ", subjectId=" + subjectId + ", gradeType=" + gradeType + '}';
+            String gradeString = "";
+            if (gradeType.getRepresentation() == 0) {
+                  gradeString = "A B 방식";
+            } else {
+                  gradeString = "S A B 방식";
+            }
+            return "과목 이름 = " + subjectName + ", 과목 번호 = " + subjectId + ", 등급 = " + gradeString;
       }
 }
 
