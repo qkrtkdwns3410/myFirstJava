@@ -1,6 +1,5 @@
 package test.exercise.testmeplz2;
 
-import javafx.scene.shape.StrokeLineCap;
 import test.exercise.testmeplz.Define;
 
 import java.util.ArrayList;
@@ -32,14 +31,14 @@ public class GenerateGradeReport {
 
       public String getReport() {
 
-            ArrayList<Subject> subjectList = school.getSubjectList();
+            ArrayList<SubjectVO> subjectList = school.getSubjectList();
 
             if (subjectList.size() == 0) {
                   System.out.println("리스트에 자료가 없습니다");
                   return "";
             }
 
-            for (Subject subject : subjectList) {
+            for (SubjectVO subject : subjectList) {
                   makeHeader(subject);
                   makeBody(subject);
                   makeFooter();
@@ -47,17 +46,17 @@ public class GenerateGradeReport {
             return buffer.toString();
       }
 
-      public void makeHeader(Subject subject) {
+      public void makeHeader(SubjectVO subject) {
             buffer.append(GenerateGradeReport.LINE + "\t").append(subject.getSubjectName())
                     .append(GenerateGradeReport.TITLE).append(GenerateGradeReport.HEADER)
                     .append(GenerateGradeReport.LINE);
       }
 
-      public void makeBody(Subject subject) {
-            ArrayList<Student> studentList = subject.getStudentList();
+      public void makeBody(SubjectVO subject) {
+            ArrayList<StudentVO> studentList = subject.getStudentList();
 
             for (int i = 0; i < studentList.size(); i++) {
-                  Student student = studentList.get(i);
+                  StudentVO student = studentList.get(i);
 
                   System.out.println("========================");
 
@@ -70,13 +69,13 @@ public class GenerateGradeReport {
             }
       }
 
-      private void getScoreGrade(Student student, int subjectId) {
-            ArrayList<Score> scoreList = student.getScoreList();
+      private void getScoreGrade(StudentVO student, int subjectId) {
+            ArrayList<ScoreVO> scoreList = student.getScoreList();
             int majorId = student.getMajorSubject().getSubjectId();
 
             GradeEvaluation[] gradeEvaluations = {new BasicEvaluation(), new MajorEvaluation()};
 
-            for (Score score : scoreList) {
+            for (ScoreVO score : scoreList) {
                   if (score.getSubject().getSubjectId() == subjectId) { // 학점 산출할 과목
 
                         String grade;
@@ -100,14 +99,14 @@ public class GenerateGradeReport {
       }
 
       public String getReportGroupbyStudent() {
-            ArrayList<Student> studentList = school.getStudentList();
+            ArrayList<StudentVO> studentList = school.getStudentList();
 
             if (studentList.size() == 0) {
                   System.out.println("리스트에 자료가 없습니다");
                   return "";
             }
 
-            for (Student student : studentList) {
+            for (StudentVO student : studentList) {
                   makeHeaderForStudent(student);
                   makeBodyForStudent(student);
                   makeFooter();
@@ -116,17 +115,17 @@ public class GenerateGradeReport {
 
       }
 
-      private void makeHeaderForStudent(Student student) {
+      private void makeHeaderForStudent(StudentVO student) {
             buffer.append(GenerateGradeReport.LINE + "\t").append(student.getStudentName())
                     .append(GenerateGradeReport.TITLE_FOR_STUDENT).append(GenerateGradeReport.HEADER_FOR_STUDENT)
                     .append(GenerateGradeReport.LINE);
       }
 
-      private void makeBodyForStudent(Student student) {
-            ArrayList<Score> scoreList = student.getScoreList();
+      private void makeBodyForStudent(StudentVO student) {
+            ArrayList<ScoreVO> scoreList = student.getScoreList();
 
             for (int index = 0; index < scoreList.size(); index++) {
-                  Score score = scoreList.get(index);
+                  ScoreVO score = scoreList.get(index);
 
                   System.out.println("======================================================");
 

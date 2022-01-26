@@ -17,14 +17,14 @@ import java.util.ArrayList;
  */
 
 
-public class Student {
+public class StudentVO {
       private int studentID;
       private String studentName;
       private Subject majorSubject;
 
-      private ArrayList<Score> scoreList = new ArrayList<>();
+      private ArrayList<ScoreVO> scoreList = new ArrayList<>();
 
-      public Student(int studentID, String studentName, Subject majorSubject) {
+      public StudentVO(int studentID, String studentName, Subject majorSubject) {
             this.studentID = studentID;
             this.studentName = studentName;
             this.majorSubject = majorSubject;
@@ -55,15 +55,15 @@ public class Student {
             this.majorSubject = majorSubject;
       }
 
-      public ArrayList<Score> getScoreList() {
+      public ArrayList<ScoreVO> getScoreList() {
             return scoreList;
       }
 
-      public void setScoreList(ArrayList<Score> scoreList) {
+      public void setScoreList(ArrayList<ScoreVO> scoreList) {
             this.scoreList = scoreList;
       }
 
-      public void addSubjectScore(Score score) {
+      public void addSubjectScore(ScoreVO score) {
 
             scoreList.add(score);
       } //스코어를 리스트에 추가합니다!

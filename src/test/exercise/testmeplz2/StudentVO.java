@@ -16,19 +16,19 @@ import java.util.ArrayList;
  */
 
 
-public class Student {
+public class StudentVO {
       private static int studentSerialID = 1000; //학번
       private int studentID;
       private String studentName; //학생이름
-      private Subject majorSubject; //학생 필수 과목 하나!
+      private SubjectVO majorSubject; //학생 필수 과목 하나!
 
-      private ArrayList<Score> scoreList = new ArrayList<>();
+      private ArrayList<ScoreVO> scoreList = new ArrayList<>();
 
-      public Student() {
+      public StudentVO() {
             this("이름없음", null);
       }
 
-      public Student(String studentName, Subject majorSubject) {
+      public StudentVO(String studentName, SubjectVO majorSubject) {
             this.studentID = studentSerialID++;
             this.studentName = studentName;
             this.majorSubject = majorSubject;
@@ -50,23 +50,23 @@ public class Student {
             this.studentName = studentName;
       }
 
-      public Subject getMajorSubject() {
+      public SubjectVO getMajorSubject() {
             return majorSubject;
       }
 
-      public void setMajorSubject(Subject majorSubject) {
+      public void setMajorSubject(SubjectVO majorSubject) {
             this.majorSubject = majorSubject;
       }
 
-      public ArrayList<Score> getScoreList() {
+      public ArrayList<ScoreVO> getScoreList() {
             return scoreList;
       }
 
-      public void setScoreList(ArrayList<Score> scoreList) {
+      public void setScoreList(ArrayList<ScoreVO> scoreList) {
             this.scoreList = scoreList;
       }
 
-      public void addSubjectScore(Score score) {
+      public void addSubjectScore(ScoreVO score) {
             scoreList.add(score);
 
       }

@@ -16,13 +16,13 @@ import java.util.ArrayList;
  */
 
 
-public class Subject {
-      ArrayList<Student> studentList = new ArrayList<>();
+public class SubjectVO {
+      ArrayList<StudentVO> studentList = new ArrayList<>();
       private String subjectName; //과목이름
       private int subjectId; //과목의 고유 번호
       private GradeType gradeType; //학점 등급 산출
 
-      public Subject(String subjectName, int subjectId, GradeType gradeType) {
+      public SubjectVO(String subjectName, int subjectId, GradeType gradeType) {
             this.subjectName = subjectName;
             this.subjectId = subjectId;
             this.gradeType = GradeType.AB_TYPE;
@@ -52,15 +52,15 @@ public class Subject {
             this.gradeType = gradeType;
       }
 
-      public ArrayList<Student> getStudentList() {
+      public ArrayList<StudentVO> getStudentList() {
             return studentList;
       }
 
-      public void setStudentList(ArrayList<Student> studentList) {
+      public void setStudentList(ArrayList<StudentVO> studentList) {
             this.studentList = studentList;
       }
 
-      public void register(Student student) {
+      public void register(StudentVO student) {
             studentList.add(student);
 
       }

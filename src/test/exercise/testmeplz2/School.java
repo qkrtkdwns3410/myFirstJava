@@ -23,8 +23,8 @@ public class School {
       private static School instance = new School();
 
 
-      private ArrayList<Student> studentList = new ArrayList<>();
-      private ArrayList<Subject> subjectList = new ArrayList<>();
+      private ArrayList<StudentVO> studentList = new ArrayList<>();
+      private ArrayList<SubjectVO> subjectList = new ArrayList<>();
 
       public static School getInstance() {
             if (instance == null) {
@@ -35,15 +35,15 @@ public class School {
       }
 
 
-      public void addStudent(Student student) {
+      public void addStudent(StudentVO student) {
             studentList.add(student);
       }
 
-      public void addSubject(Subject subject) {
+      public void addSubject(SubjectVO subject) {
             subjectList.add(subject);
       }
 
-      public void modifySubject(Subject subject, int index) {
+      public void modifySubject(SubjectVO subject, int index) {
             subjectList.remove(index);
             subjectList.add(subject);
 
@@ -69,7 +69,7 @@ public class School {
             }
             System.out.println();
             for (int i = 0; i < studentList.size(); i++) {
-                  Student student = studentList.get(i);
+                  StudentVO student = studentList.get(i);
                   System.out.println(i + ". " + student);
             }
             System.out.println();
@@ -84,26 +84,26 @@ public class School {
             }
 
             for (int i = 0; i < subjectList.size(); i++) {
-                  Subject subject = subjectList.get(i);
+                  SubjectVO subject = subjectList.get(i);
                   System.out.println(i + ". " + subject);
             }
 
             return subjectList.size() != 0;
       }
 
-      public ArrayList<Student> getStudentList() {
+      public ArrayList<StudentVO> getStudentList() {
             return studentList;
       }
 
-      public void setStudentList(ArrayList<Student> studentList) {
+      public void setStudentList(ArrayList<StudentVO> studentList) {
             this.studentList = studentList;
       }
 
-      public ArrayList<Subject> getSubjectList() {
+      public ArrayList<SubjectVO> getSubjectList() {
             return subjectList;
       }
 
-      public void setSubjectList(ArrayList<Subject> subjectList) {
+      public void setSubjectList(ArrayList<SubjectVO> subjectList) {
             this.subjectList = subjectList;
       }
 
@@ -332,7 +332,7 @@ public class School {
                   if (checkBackSlashForInt(numOfScoredSubject)) {
                         return true;
                   }
-                  ArrayList<Score> checkArr = studentList.get(numOfScoredSubject).getScoreList();
+                  ArrayList<ScoreVO> checkArr = studentList.get(numOfScoredSubject).getScoreList();
                   if (checkArr.size() != 0) {
                         System.out.println("이미 값이 존재합니다");
                         return true;
@@ -414,7 +414,7 @@ public class School {
                   }
                   System.out.print("\n\n\n\n\n");
 
-                  for (Subject subject : subjectList) {
+                  for (SubjectVO subject : subjectList) {
                         if (subject.getSubjectId() == getOne) {
                               throw new AlreadyExistedException("이미 존재하는 값입니다");
                         }
@@ -431,7 +431,7 @@ public class School {
                   System.out.print("\n\n\n\n\n");
 
 
-                  instance.addSubject(new Subject(name, getOne, GradeType.find(numType)));
+                  instance.addSubject(new SubjectVO(name, getOne, GradeType.find(numType)));
 
             } catch (NumberFormatException e1) {
                   System.out.println("\n\n형식이 틀리거나 뒤로가기를 선택하셨습니다\n\n");
@@ -595,7 +595,7 @@ public class School {
                         System.out.println("======================================================");
                         return true;
                   }
-                  instance.addStudent(new Student(name, School.getInstance().getSubjectList().get(getOne)));
+                  instance.addStudent(new StudentVO(name, School.getInstance().getSubjectList().get(getOne)));
                   System.out.print("\n\n등록 성공\n\n");
 
 
@@ -671,7 +671,7 @@ public class School {
                   System.out.print("\n\n\n\n\n");
 
 
-                  instance.modifySubject(new Subject(modifiedSubjectName, modifiedSubejctNum, GradeType.find(numOfGradeType)), getModifyNum);
+                  instance.modifySubject(new SubjectVO(modifiedSubjectName, modifiedSubejctNum, GradeType.find(numOfGradeType)), getModifyNum);
 
             } catch (NumberFormatException e) {
                   System.out.println("\n\n형식이 틀리거나 뒤로가기를 선택하셨습니다\n\n");
@@ -721,12 +721,12 @@ public class School {
             }
       }
 
-      public void addScoreForStudent(Student student, Subject subject, int point) {
+      public void addScoreForStudent(StudentVO student, SubjectVO subject, int point) {
 
             try {
 
                   subject.register(student);
-                  Score score = new Score(student.getStudentID(), subject, point);
+                  ScoreVO score = new ScoreVO(student.getStudentID(), subject, point);
 
                   //성적 등록시 자동 수강신청으로 생각하겠습니다.
 
@@ -738,7 +738,7 @@ public class School {
 
       }
 
-      public void removeScoreForStudent(Subject subject, int index) {
+      public void removeScoreForStudent(SubjectVO subject, int index) {
 
             try {
 
@@ -753,7 +753,7 @@ public class School {
 
       } // 삭제시 해당 학생도 삭제되는 메서드
 
-      public void modifyScoreForStudent(Student student, Subject subject, int point) {
+      public void modifyScoreForStudent(StudentVO student, SubjectVO subject, int point) {
 
             int index = -1;
             for (int i = 0; i < subjectList.size(); i++) {

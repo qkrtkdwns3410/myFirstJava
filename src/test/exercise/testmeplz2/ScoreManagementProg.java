@@ -13,7 +13,7 @@ package test.exercise.testmeplz2;
  */
 
 
-public class TestMain {
+public class ScoreManagementProg {
       public static void main(String[] args) {
             School.getInstance().mainLogic();
       }

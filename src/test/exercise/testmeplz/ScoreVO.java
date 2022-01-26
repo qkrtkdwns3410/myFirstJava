@@ -13,12 +13,12 @@ package test.exercise.testmeplz;
  */
 
 
-public class Score {
+public class ScoreVO {
       private int studentID; //학번
-      private Subject subject; //과목
+      private SubjectVO subject; //과목
       private int point; // 점수
 
-      public Score(int studentID, Subject subject, int point) {
+      public ScoreVO(int studentID, SubjectVO subject, int point) {
             this.studentID = studentID;
             this.subject = subject;
             this.point = point;
@@ -32,11 +32,11 @@ public class Score {
             this.studentID = studentID;
       }
 
-      public Subject getSubject() {
+      public SubjectVO getSubject() {
             return subject;
       }
 
-      public void setSubject(Subject subject) {
+      public void setSubject(SubjectVO subject) {
             this.subject = subject;
       }
 

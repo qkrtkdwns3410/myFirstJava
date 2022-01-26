@@ -16,14 +16,14 @@ import java.util.ArrayList;
  */
 
 
-public class Subject {
+public class SubjectVO {
       private String subjectName;
       private int subjectID;
       private int gradeType;
 
-      private ArrayList<Student> studentList = new ArrayList<>();
+      private ArrayList<StudentVO> studentList = new ArrayList<>();
 
-      public Subject(String subjectName, int subjectID) {
+      public SubjectVO(String subjectName, int subjectID) {
             this.subjectName = subjectName;
             this.subjectID = subjectID;
       }
@@ -52,16 +52,16 @@ public class Subject {
             this.gradeType = gradeType;
       }
 
-      public ArrayList<Student> getStudentList() {
+      public ArrayList<StudentVO> getStudentList() {
             return studentList;
       }
 
 
-      public void setStudentList(ArrayList<Student> studentList) {
+      public void setStudentList(ArrayList<StudentVO> studentList) {
             this.studentList = studentList;
       }
 
-      public void register(Student student) {
+      public void register(StudentVO student) {
             studentList.add(student);
       } // 수강 신청 메서드
 
