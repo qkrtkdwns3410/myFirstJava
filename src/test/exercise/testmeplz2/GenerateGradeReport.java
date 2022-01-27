@@ -25,7 +25,7 @@ public class GenerateGradeReport {
       public static final String HEADER_FOR_STUDENT = "과목명 | 과목번호 | 점수(등급) \n";
       public static final String LINE = "--------------------------------------\n";
 
-      private School school = School.getInstance();
+      private ScoreManagementApplication school = ScoreManagementApplication.getInstance();
 
       private final StringBuffer buffer = new StringBuffer();
 

@@ -19,16 +19,16 @@ import static test.exercise.testmeplz2.Util.sc;
  */
 
 
-public class School {
-      private static School instance = new School();
+public class ScoreManagementApplication {
+      private static ScoreManagementApplication instance = new ScoreManagementApplication();
 
 
       private ArrayList<StudentVO> studentList = new ArrayList<>();
       private ArrayList<SubjectVO> subjectList = new ArrayList<>();
 
-      public static School getInstance() {
+      public static ScoreManagementApplication getInstance() {
             if (instance == null) {
-                  instance = new School();
+                  instance = new ScoreManagementApplication();
             }
 
             return instance;
@@ -143,23 +143,18 @@ public class School {
                               case 1:
                                     enrollStudent();
                                     break;
-
-
                               case 2:
                                     modifyStudent();
                                     break;
-
                               case 3:
                                     removeStudent();
                                     break;
-
                               case 4:
                                     showStudentInfo();
                                     break;
                               case 5:
                                     try {
                                           System.out.println("\n\n처음으로 이동\n\n");
-
                                           return;
                                     } catch (Exception e) {
                                           e.printStackTrace();
@@ -173,25 +168,21 @@ public class School {
                         switch (manageNum) {
                               case 1:
                                     enrollSubject(fields);
-
                                     break;
                               case 2:
                                     modifySubject(fields);
                                     break;
                               case 3:
                                     removeSubject();
-
                                     break;
                               case 4:
                                     showSubjectInfo();
                                     break;
                               case 5:
                                     System.out.println("\n\n처음으로 이동\n\n");
-
                                     return;
                               default:
                                     System.out.println("\n\n잘못된 번호 입력\n\n");
-
                                     break;
                         }
                   } else if (btnNumInput == 3) { // 성적
@@ -337,7 +328,6 @@ public class School {
                         System.out.println("이미 값이 존재합니다");
                         return true;
                   }
-
 
 
                   System.out.print("\n\n\n\n\n");
@@ -506,9 +496,9 @@ public class School {
 
                   System.out.println("========================");
                   System.out.println("해당 학생의 정보");
-                  System.out.println(School.getInstance().getStudentList().get(stdNum)
-                                             .getStudentName() + " : " + School.getInstance().getSubjectList()
-                          .get(stdNum).getSubjectId());
+                  System.out.println(ScoreManagementApplication.getInstance().getStudentList().get(stdNum)
+                                             .getStudentName() + " : " + ScoreManagementApplication.getInstance()
+                          .getSubjectList().get(stdNum).getSubjectId());
 
                   System.out.println("========================");
 
@@ -530,7 +520,7 @@ public class School {
                   }
                   System.out.print("\n\n\n\n\n");
 
-                  if (School.getInstance().getSubjectList().size() <= changedMajorNum) {
+                  if (ScoreManagementApplication.getInstance().getSubjectList().size() <= changedMajorNum) {
                         System.out.println("======================================================");
                         System.out.println("그런 번호는 없습니다만");
                         System.out.println("======================================================");
@@ -538,15 +528,16 @@ public class School {
                   }
 
                   System.out.println("========================");
-                  School.getInstance().getStudentList().get(stdNum).setStudentName(changedName);
-                  School.getInstance().getStudentList().get(stdNum)
-                          .setMajorSubject(School.getInstance().getSubjectList().get(changedMajorNum));
+                  ScoreManagementApplication.getInstance().getStudentList().get(stdNum).setStudentName(changedName);
+                  ScoreManagementApplication.getInstance().getStudentList().get(stdNum)
+                          .setMajorSubject(ScoreManagementApplication.getInstance().getSubjectList()
+                                                   .get(changedMajorNum));
 
                   System.out.println("반영되었습니다!");
 
                   System.out.println("========================");
                   System.out.println("변경된 내역입니다");
-                  School.getInstance().getStudentList().get(stdNum).toString();
+                  ScoreManagementApplication.getInstance().getStudentList().get(stdNum).toString();
                   System.out.println("========================");
 
                   return true;
@@ -589,13 +580,14 @@ public class School {
 
                   System.out.print("\n\n\n\n\n");
 
-                  if (School.getInstance().getSubjectList().size() <= getOne) {
+                  if (ScoreManagementApplication.getInstance().getSubjectList().size() <= getOne) {
                         System.out.println("======================================================");
                         System.out.println("그런 번호는 없습니다만");
                         System.out.println("======================================================");
                         return true;
                   }
-                  instance.addStudent(new StudentVO(name, School.getInstance().getSubjectList().get(getOne)));
+                  instance.addStudent(new StudentVO(name, ScoreManagementApplication.getInstance().getSubjectList()
+                          .get(getOne)));
                   System.out.print("\n\n등록 성공\n\n");
 
 
@@ -815,12 +807,14 @@ public class School {
                   } catch (NumberFormatException e) {
                         System.out.println("\n\n형식이 틀리거나 뒤로가기를 선택하셨습니다\n\n");
                   }
-
+                  if (checkBackSlashForInt(btnNum)) {
+                        continue;
+                  }
                   switch (btnNum) {
                         case 1:
                         case 2:
                         case 3:
-                              School.getInstance().goManage(btnNum);
+                              ScoreManagementApplication.getInstance().goManage(btnNum);
                               break;
                         case 4:
                               try {

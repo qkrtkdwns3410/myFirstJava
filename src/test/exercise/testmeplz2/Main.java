@@ -13,9 +13,9 @@ package test.exercise.testmeplz2;
  */
 
 
-public class ScoreManagementProg {
+public class Main {
       public static void main(String[] args) {
-            School.getInstance().mainLogic();
+            ScoreManagementApplication.getInstance().mainLogic();
       }
 }
 
