@@ -16,9 +16,9 @@ package test.exercise.testmeplz2;
 public class ScoreVO {
       private int studentId; //학번
       private SubjectVO subject; //과목
-      private int point; //점수
+      private float point; //점수
 
-      public ScoreVO(int studentId, SubjectVO subject, int point) {
+      public ScoreVO(int studentId, SubjectVO subject, float point) {
             this.studentId = studentId;
             this.subject = subject;
             this.point = point;
@@ -40,7 +40,7 @@ public class ScoreVO {
             this.subject = subject;
       }
 
-      public int getPoint() {
+      public float getPoint() {
             return point;
       }
 

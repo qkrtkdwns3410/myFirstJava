@@ -3,6 +3,7 @@ package test.exercise.testmeplz2;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import static test.exercise.testmeplz2.Util.clearConsole;
 import static test.exercise.testmeplz2.Util.sc;
 
 
@@ -70,7 +71,7 @@ public class ScoreManagementApplication {
             System.out.println();
             for (int i = 0; i < studentList.size(); i++) {
                   StudentVO student = studentList.get(i);
-                  System.out.println(i + ". " + student);
+                  System.out.println(i + ". 학생 이름 : " + student.getStudentName()+"\n\t과목 이름 : "+student.getMajorSubject().getSubjectName()+"\n\t\t과목 번호 : "+student.getMajorSubject().getSubjectId());
             }
             System.out.println();
 
@@ -85,7 +86,7 @@ public class ScoreManagementApplication {
 
             for (int i = 0; i < subjectList.size(); i++) {
                   SubjectVO subject = subjectList.get(i);
-                  System.out.println(i + ". " + subject);
+                  System.out.println(i + ". 과목 이름 : " + subject.getSubjectName()+"\n\t과목 번호 : "+subject.getSubjectId()+"\n\t\t등급 : "+subject.getGradeTypeString());
             }
 
             return subjectList.size() != 0;
@@ -109,8 +110,8 @@ public class ScoreManagementApplication {
 
 
       public void goManage(int btnNumInput) {
+            clearConsole();
             Field[] fields = DefineType.class.getFields();
-            System.out.println("========================");
 
             while (true) {
 
@@ -119,23 +120,37 @@ public class ScoreManagementApplication {
                         System.out.println();
                         System.out.println();
                         System.out.println();
+                        switch (btnNumInput) {
+                              case 1:
+                                    System.out.println("\t\t학생 관리");
+                                    break;
+                              case 2:
+                                    System.out.println("\t\t과목 관리");
+                                    break;
+                              case 3:
+                                    System.out.println("\t\t성적 관리");
+                                    break;
+                              default:
+                                    break;
+                        }
                         System.out.println("========================");
-                        System.out.println("1. 등록");
-                        System.out.println("2. 수정");
-                        System.out.println("3. 삭제");
-                        System.out.println("4. 정보 출력");
-                        System.out.println("5. 처음으로");
-                        System.out.print("========================\n\n\n\n\n\n\n\n");
-
+                        System.out.println("\t\t1. 등록");
+                        System.out.println("\t\t2. 수정");
+                        System.out.println("\t\t3. 삭제");
+                        System.out.println("\t\t4. 정보 출력");
+                        System.out.println("\t\t5. 처음으로");
+                        System.out.print("=========================\n");
+                        System.out.print("번호 입력 : ");
                         manageNum = Integer.parseInt(sc.nextLine());
+                        System.out.println();
                         if (checkBackSlashForInt(manageNum)) {
                               return;
                         }
-                        System.out.print("\n\n\n\n\n");
-
+                        clearConsole();
 
                   } catch (NumberFormatException e) {
                         System.out.println("\n\n형식이 틀리거나 뒤로가기를 선택하셨습니다\n\n");
+                        clearConsole();
                   }
 
                   if (btnNumInput == 1) { //학생
@@ -232,7 +247,7 @@ public class ScoreManagementApplication {
                   showStudentInfo();
                   System.out.println("========================");
                   System.out.println("성적을 수정할 학생을 선택해주세요");
-
+                  System.out.print("번호 입력 : ");
                   int numOfScoredStudent2 = Integer.parseInt(sc.nextLine());
 
                   if (checkBackSlashForInt(numOfScoredStudent2)) {
@@ -245,7 +260,7 @@ public class ScoreManagementApplication {
                   System.out.println("========================");
 
                   System.out.println("성적을 수정할 과목을 입력해주세요");
-
+                  System.out.print("번호 입력 : ");
                   int numOfScoredSubject2 = Integer.parseInt(sc.nextLine());
 
                   if (checkBackSlashForInt(numOfScoredStudent2)) {
@@ -254,9 +269,8 @@ public class ScoreManagementApplication {
 
                   System.out.print("\n\n\n\n\n");
 
-                  System.out.println("점수 입력");
-
-                  int pointOfSubject2 = Integer.parseInt(sc.nextLine());
+                  System.out.print("점수 입력 : ");
+                  float pointOfSubject2 = Float.parseFloat(sc.nextLine());
                   if (checkBackSlashForInt(pointOfSubject2)) {
                         return true;
                   }
@@ -277,6 +291,8 @@ public class ScoreManagementApplication {
                   System.out.println("처리되었습니다.");
 
 
+            } catch (NumberFormatException e) {
+                  System.out.println("");
             } catch (Exception e) {
                   e.printStackTrace();
             }
@@ -298,6 +314,7 @@ public class ScoreManagementApplication {
 
                   System.out.println("========================");
                   System.out.println("성적을 입력할 학생을 선택해주세요");
+                  System.out.print("번호 입력 : ");
 
                   int numOfScoredStudent = Integer.parseInt(sc.nextLine());
                   if (checkBackSlashForInt(numOfScoredStudent)) {
@@ -318,6 +335,7 @@ public class ScoreManagementApplication {
 
                   System.out.println("성적을 입력할 과목을 선택해주세요");
 
+                  System.out.print("번호 입력 : ");
                   int numOfScoredSubject = Integer.parseInt(sc.nextLine());
 
                   if (checkBackSlashForInt(numOfScoredSubject)) {
@@ -332,8 +350,9 @@ public class ScoreManagementApplication {
 
                   System.out.print("\n\n\n\n\n");
 
-                  System.out.println("점수 입력");
-                  int pointOfSubject = Integer.parseInt(sc.nextLine());
+                  System.out.print("점수 입력 : ");
+
+                  float pointOfSubject = Float.parseFloat(sc.nextLine());
 
                   if (checkBackSlashForInt(pointOfSubject)) {
                         return true;
@@ -365,6 +384,8 @@ public class ScoreManagementApplication {
                   System.out.println("========================");
 
                   System.out.println("삭제할 과목의 번호 ex) 0, 1, 2 ...");
+                  System.out.print("번호 입력 : ");
+
                   int removeNum = Integer.parseInt(sc.nextLine());
                   if (checkBackSlashForInt(removeNum)) {
                         return;
@@ -390,14 +411,14 @@ public class ScoreManagementApplication {
                   showSubjectInfo();
                   System.out.println("========================");
 
-                  System.out.println("등록할 과목 이름 입력");
+                  System.out.print("등록할 과목 이름 입력 : ");
                   String name = sc.nextLine();
                   if (checkBackSlashForString(name)) {
                         return;
                   }
                   System.out.print("\n\n\n\n\n");
 
-                  System.out.println("등록할 과목의 번호 입력");
+                  System.out.print("등록할 과목의 번호 입력 : ");
                   int getOne = Integer.parseInt(sc.nextLine());
                   if (checkBackSlashForInt(getOne)) {
                         return;
@@ -413,7 +434,7 @@ public class ScoreManagementApplication {
                   System.out.println("========================");
                   showEvaluationProcess(fields);
                   System.out.println("========================");
-                  System.out.println("등록할 학점 평가 방식을 선택 (숫자 선택)");
+                  System.out.print("등록할 학점 평가 방식을 선택 (숫자 선택) : ");
                   int numType = Integer.parseInt(sc.nextLine());
                   if (checkBackSlashForInt(numType)) {
                         return;
@@ -441,7 +462,7 @@ public class ScoreManagementApplication {
                   showStudentInfo();
                   System.out.println("========================");
 
-                  System.out.println("삭제할 학생 번호을 입력해주세요");
+                  System.out.print("삭제할 학생 번호을 입력해주세요 : ");
                   int wantRemoveStdNum = Integer.parseInt(sc.nextLine());
                   if (checkBackSlashForInt(wantRemoveStdNum)) {
                         return true;
@@ -477,15 +498,13 @@ public class ScoreManagementApplication {
                   }
 
                   System.out.println("========================");
-                  System.out.println("변경할 학생을 선택해주세요");
-                  System.out.print("\n\n\n\n\n");
+                  System.out.print("변경할 학생을 선택해주세요 : ");
 
                   int stdNum = Integer.parseInt(sc.nextLine());
                   if (checkBackSlashForInt(stdNum)) {
                         return true;
                   }
-                  System.out.print("\n\n\n\n\n");
-
+                  clearConsole();
                   if (!(stdNum >= 0 && stdNum < studentList.size())) {
                         System.out.println("잘못된 번호 입력!");
                         System.out.println();
@@ -507,18 +526,18 @@ public class ScoreManagementApplication {
                   if (checkBackSlashForString(changedName)) {
                         return true;
                   }
-                  System.out.print("\n\n\n\n\n");
+                  clearConsole();
 
-                  System.out.println("변경할 전공을 입력해주세요");
                   System.out.println("======================================================");
                   showSubjectInfo();
                   System.out.println("======================================================");
+                  System.out.print("변경할 전공을 입력해주세요 : ");
 
                   int changedMajorNum = Integer.parseInt(sc.nextLine());
                   if (checkBackSlashForInt(changedMajorNum)) {
                         return true;
                   }
-                  System.out.print("\n\n\n\n\n");
+                  clearConsole();
 
                   if (ScoreManagementApplication.getInstance().getSubjectList().size() <= changedMajorNum) {
                         System.out.println("======================================================");
@@ -552,7 +571,7 @@ public class ScoreManagementApplication {
                   System.out.println();
                   char back = '\\';
 
-                  System.out.println("학생 이름 입력");
+                  System.out.print("학생 이름 입력 : ");
 
                   String name = sc.nextLine();
                   if (checkBackSlashForString(name)) {
@@ -571,8 +590,7 @@ public class ScoreManagementApplication {
                   }
 
                   System.out.println("========================");
-                  System.out.println("필수 과목 입력 (숫자로 입력해주세요)");
-                  System.out.print("\n\n\n\n\n");
+                  System.out.print("필수 과목 입력 (숫자로 입력해주세요) : ");
                   int getOne = Integer.parseInt(Util.sc.nextLine());
                   if (checkBackSlashForInt(getOne)) {
                         return true;
@@ -612,7 +630,7 @@ public class ScoreManagementApplication {
                   System.out.println("========================");
 
 
-                  System.out.println("수정할 과목의 번호 입력");
+                  System.out.print("수정할 과목의 번호 입력 : ");
 
                   int getModifyNum = Integer.parseInt(sc.nextLine());
                   if (checkBackSlashForInt(getModifyNum)) {
@@ -629,7 +647,7 @@ public class ScoreManagementApplication {
                   }
                   System.out.println("========================");
 
-                  System.out.println("과목 이름 (수정)");
+                  System.out.print("과목 이름 (수정) : ");
                   String modifiedSubjectName = sc.nextLine();
                   if (checkBackSlashForString(modifiedSubjectName)) {
                         return;
@@ -637,7 +655,7 @@ public class ScoreManagementApplication {
 
                   System.out.print("\n\n\n\n\n");
 
-                  System.out.println("과목 번호 (수정)");
+                  System.out.print("과목 번호 (수정) : ");
 
                   int modifiedSubejctNum = Integer.parseInt(sc.nextLine());
                   if (checkBackSlashForInt(modifiedSubejctNum)) {
@@ -655,7 +673,7 @@ public class ScoreManagementApplication {
                   System.out.println("========================");
 
 
-                  System.out.println("과목 학점 평가 방식(수정) - 번호로 입력");
+                  System.out.print("과목 학점 평가 방식(수정) - 번호로 입력 : ");
                   int numOfGradeType = Integer.parseInt(sc.nextLine());
                   if (checkBackSlashForInt(numOfGradeType)) {
                         return;
@@ -677,7 +695,7 @@ public class ScoreManagementApplication {
 
       }
 
-      private boolean checkBackSlashForInt(int getModifyNum) {
+      private boolean checkBackSlashForInt(float getModifyNum) {
             if (getModifyNum == (int) '\\') {
                   System.out.println("메인으로 이동");
                   return true;
@@ -713,7 +731,7 @@ public class ScoreManagementApplication {
             }
       }
 
-      public void addScoreForStudent(StudentVO student, SubjectVO subject, int point) {
+      public void addScoreForStudent(StudentVO student, SubjectVO subject, float point) {
 
             try {
 
@@ -745,7 +763,7 @@ public class ScoreManagementApplication {
 
       } // 삭제시 해당 학생도 삭제되는 메서드
 
-      public void modifyScoreForStudent(StudentVO student, SubjectVO subject, int point) {
+      public void modifyScoreForStudent(StudentVO student, SubjectVO subject, float point) {
 
             int index = -1;
             for (int i = 0; i < subjectList.size(); i++) {
@@ -754,7 +772,6 @@ public class ScoreManagementApplication {
                   }
             }
 
-            System.out.println(student.getScoreList());
             if (index != -1) {
                   student.removeSubjectScore(index);
                   subject.getStudentList().remove(index);
@@ -796,8 +813,9 @@ public class ScoreManagementApplication {
                         System.out.println();
                         System.out.println("======================================================");
                         System.out.println("TIP) \\ 을 입력시 \"입력도중\" 메인화면으로 이동할 수 있습니다");
-                        System.out.print("1. 학생 관리 2. 과목 관리 3. 성적 관리 4. 리포팅(출력) 5. 프로그램 종료 99.제작의도\n\n\n\n\n\n\n\n");
-
+                        System.out.println();
+                        System.out.print("\t1. 학생 관리\n\n\t2. 과목 관리 \n\n\t3. 성적 관리 \n\n\t4. 리포팅(출력) \n\n\t5. 프로그램 종료\n\n");
+                        System.out.print("번호 입력 : ");
                         btnNum = Integer.parseInt(sc.nextLine());
                         if (checkBackSlashForInt(btnNum)) {
                               continue;
@@ -819,8 +837,8 @@ public class ScoreManagementApplication {
                         case 4:
                               try {
                                     System.out.print("출력 방식 선택\n\n");
-                                    System.out.print("1. 과목별 성적 출력\t\t2. 학생별 성적 출력\n\n");
-
+                                    System.out.print("\t\t1. 과목별 성적 출력\n\n\t\t2. 학생별 성적 출력\n\n");
+                                    System.out.print("번호 입력 : ");
                                     int numOfPrintType = Integer.parseInt(sc.nextLine());
                                     if (checkBackSlashForInt(numOfPrintType)) {
                                           return;
@@ -850,12 +868,6 @@ public class ScoreManagementApplication {
                         case 5:
                               System.out.println("프로그램이 종료됩니다");
                               System.exit(0);
-                        case 99:
-                              System.out.print("\n\n\n\t\t\t\t제작의도\t\t\t\t\n\n\n");
-                              System.out.println("\t\t\t\t학점 관리 프로그램입니다.\t\t\t\t");
-                              System.out.println("\t\t\t\t해당 프로그램은 수강신청된 과목에 대한 수강하는 학생들의 학점을 수기 입력없이 계산할 수 있도록 제작된 프로그램입니다.\t\t\t\t");
-                              System.out.print("\n\n\n");
-                              break;
                         default:
                               System.out.println("잘못된 입력입니다");
 

@@ -15,7 +15,7 @@ package test.exercise.testmeplz2;
 
 public class BasicEvaluation implements GradeEvaluation {
       @Override
-      public String getGrade(int point) {
+      public String getGrade(float point) {
             String grade;
 
             if (point >= 95 && point <= 100) {

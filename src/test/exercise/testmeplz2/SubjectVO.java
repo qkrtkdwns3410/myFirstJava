@@ -48,6 +48,16 @@ public class SubjectVO {
             return gradeType;
       }
 
+      public String getGradeTypeString() {
+            String gradeString = "";
+            if (gradeType.getRepresentation() == 0) {
+                  gradeString = "A B 방식";
+            } else {
+                  gradeString = "S A B 방식";
+            }
+            return gradeString;
+      }
+
       public void setGradeType(GradeType gradeType) {
             this.gradeType = gradeType;
       }

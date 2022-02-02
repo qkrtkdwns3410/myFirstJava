@@ -14,7 +14,7 @@ package test.exercise.testmeplz2;
 
 
 public interface GradeEvaluation {
-      public String getGrade(int point);
+      public String getGrade(float point);
 }
 
     

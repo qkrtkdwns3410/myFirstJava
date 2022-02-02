@@ -1,10 +1,6 @@
 package test.exercise.testmeplz2.programmers;
 
-import javax.print.attribute.HashAttributeSet;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -22,9 +18,9 @@ import java.util.Map;
 
 public class ReportResultApplication {
       public static void main(String[] args) {
-            String[] id_list = {"muzi", "frodo", "apeach", "neo"};
-            String[] report = {"muzi frodo", "apeach frodo", "frodo neo", "apeach muzi"};
-            int k = 2;
+            String[] id_list = {"con", "ryan"};
+            String[] report = {"ryan con", "ryan con", "ryan con", "ryan con"};
+            int k = 3;
 
             Solution solution = new Solution();
             solution.solution(id_list, report, k);
@@ -32,43 +28,108 @@ public class ReportResultApplication {
 }
 
 class Solution {
+
       public ArrayList<Integer> solution(String[] id_list, String[] report, int k) {
             System.out.println("id_list = " + Arrays.toString(id_list));
             System.out.println("report = " + Arrays.toString(report));
             System.out.println("k = " + k);
             System.out.println("======================================================");
-
+            report = Arrays.stream(report).distinct().toArray(String[]::new);
+            System.out.println("report = " + Arrays.toString(report));
             ArrayList<String> reporter = new ArrayList<>();
             ArrayList<String> reported = new ArrayList<>();
+            ArrayList<Integer> answer = new ArrayList<>();
 
-            HashMap<String, HashMap<String, Integer>> reportedMap = new HashMap<>();
-            HashMap<String, Integer> reportedCountMap = new HashMap<>();
+            LinkedHashMap<String, HashMap<String, Integer>> reportOverviewMap = new LinkedHashMap<>();
 
-            for (int index = 0; index < id_list.length; index++) {
 
-                  reportedCountMap.put(id_list[index],0);
-                  reportedMap.put(id_list[index], reportedCountMap);
-
+            for (String value : id_list) {
+                  LinkedHashMap<String, Integer> reportedCountMap = new LinkedHashMap<>();
+                  answer.add(0);
+                  for (String s : id_list) {
+                        reportedCountMap.put(s, 0);
+                  }
+                  reportOverviewMap.put(value, reportedCountMap);
             }
-
-            System.out.println("======================================================");
+            System.out.println("reportOverviewMap = " + reportOverviewMap);
 
             for (String s : report) {
                   reporter.add(s.split(" ")[0]);
                   reported.add(s.split(" ")[1]);
             }
-
             System.out.println("reporter = " + reporter);
             System.out.println("reported = " + reported);
-            System.out.println("======================================================");
 
-            ArrayList<Integer> answer = new ArrayList<>();
+            System.out.println("reportOverviewMap = " + reportOverviewMap);
 
-            for (int index = 0; index < id_list.length; index++) {
+            ArrayList<Integer> reportCount = new ArrayList<>();
+            int count = 0;
+            for (Map.Entry<String, HashMap<String, Integer>> entry : reportOverviewMap.entrySet()) {
+                  System.out.println("entry = " + entry);
+                  System.out.println("뭐냐구");
+                  for (int index4 = 0; index4 < reported.size(); index4++) {
+                        System.out.println("index4 = " + index4);
+                        System.out.println("몬데");
+
+                        if (entry.getKey().equals(reported.get(index4))) {
+                              System.out.println("======================================================");
+                              System.out.println("entry = " + entry);
+                              System.out.println("reported = " + reported.get(index4));
+
+                              //신고당한사람존재한다면 해당 신고한 사람의 값을 1로 변경해야합니다
+                              for (Map.Entry<String, Integer> stringIntegerEntry : entry.getValue().entrySet()) {
+                                    System.out.println(stringIntegerEntry);
+                                    System.out.println("뭐지");
+                                    System.out.println("반복됩니다");
+                                    if (stringIntegerEntry.getKey().equals(reporter.get(index4))) {
+                                          System.out.println("======================================================");
+                                          System.out.println("stringIntegerEntry = " + stringIntegerEntry);
+                                          System.out.println("reporter = " + reporter.get(index4));
+                                          stringIntegerEntry.setValue(1);
+                                          count++;
+                                          System.out.println("count = " + count);
+                                    }
+                              }
+
+                        }
+                  }
+                  reportCount.add(count);
+                  count = 0;
+                  System.out.println("reportCount = " + reportCount);
 
             }
-            return answer;
 
+            for (int index = 0; index < reportCount.size(); index++) {
+                  System.out.println();
+                  if (reportCount.get(index) >= k) { // 신고 횟수가 K 회 이상이라면
+                        int index1 = 0;
+                        for (Map.Entry<String, HashMap<String, Integer>> entry : reportOverviewMap.entrySet()) { //map의 값 중에서 신고자들에게는 +
+                              if (index1 == index) {
+                                    System.out.println("index1 = " + index1);
+                                    System.out.println("index = " + index);
+                                    int index2 = 0;
+                                    for (Map.Entry<String, Integer> stringIntegerEntry : entry.getValue().entrySet()) {
+                                          if (stringIntegerEntry.getValue() == 1) {
+                                                int answerOf = answer.get(index2);
+                                                answer.set(index2, answerOf + 1);
+                                          }
+                                          index2++;
+                                          System.out.println("answer = " + answer);
+                                    }
+                              }
+                              index1++;
+                              System.out.println("======================================================");
+                        }
+                        System.out.println("index1 = " + index1);
+
+
+                  }
+                  System.out.println("answer = " + answer);
+                  System.out.println();
+            }
+
+            System.out.println("reportOverviewMap = " + reportOverviewMap);
+            return answer;
       }
 }
 
