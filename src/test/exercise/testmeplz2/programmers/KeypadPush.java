@@ -95,7 +95,6 @@ class Solution7 {
                                     String str = strArr.get(index2);
                                     if (str.equals(Integer.toString(number))) { //숫자를 문자로 변환하고 해당 키패드의 값이 number값과 동일한지 검증
                                           System.out.println("str = " + str);
-                                          distanceCalc(leftPos, rightPos, str);
 
                                     }
                               }
@@ -105,7 +104,7 @@ class Solution7 {
                   }
 
 
-                  //생각하는 하는 분기점
+                  //브레인스토뮝
                   /*
                    * 1. 현재 사용자의 손이 어떤 손인지!
                    *           어떤 손인지에 따라서 거리가 같은 경우 어떠한 손을 사용해야하는 지에 대한 사고
@@ -119,12 +118,14 @@ class Solution7 {
             return answer;
       }
 
-      private void distanceCalc(int leftPos,int rightPos, String pushNum) {
+      private void distanceCalc(int leftPos,int rightPos, String pushNum,) {
             int distance = 0;
             System.out.println("leftPos = " + leftPos);
             System.out.println("rightPos = " + rightPos);
             System.out.println("pushNum = " + pushNum);
             System.out.println("======================================================");
+
+
 
 
       }
