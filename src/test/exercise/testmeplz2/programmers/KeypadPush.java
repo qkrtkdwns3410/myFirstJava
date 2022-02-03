@@ -1,5 +1,9 @@
 package test.exercise.testmeplz2.programmers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
 /**
  * packageName    : test.exercise.testmeplz2.programmers
  * fileName       : KeypadPush
@@ -25,13 +29,104 @@ public class KeypadPush {
 
 class Solution7 {
       public String solution(int[] numbers, String hand) {
-            System.out.println("numbers = " + numbers);
+            System.out.println("numbers = " + Arrays.toString(numbers));
             System.out.println("hand = " + hand);
             System.out.println("======================================================");
+
+            ArrayList<String> data1 = new ArrayList<>();
+            data1.add("1");
+            data1.add("2");
+            data1.add("3");
+
+            ArrayList<String> data2 = new ArrayList<>();
+            data2.add("4");
+            data2.add("5");
+            data2.add("6");
+
+            ArrayList<String> data3 = new ArrayList<>();
+            data3.add("7");
+            data3.add("8");
+            data3.add("9");
+
+            ArrayList<String> data4 = new ArrayList<>();
+            data4.add("10");
+            data4.add("0");
+            data4.add("11");
+
+            ArrayList<ArrayList<String>> keypad = new ArrayList<>();
+
+            keypad.add(data1);
+            keypad.add(data2);
+            keypad.add(data3);
+            keypad.add(data4);
+
+            System.out.println("keypad = " + keypad);
+            System.out.println("======================================================");
+
+            ArrayList<Integer> leftArr = new ArrayList<>();
+            ArrayList<Integer> rightArr = new ArrayList<>();
+
+            ArrayList<String> resultArr = new ArrayList<>();
+
+            int leftPos = 0; // 왼손의 위치
+            int rightPos = 0; // 오른손의 위치
+
+            leftArr.add(1);
+            leftArr.add(4);
+            leftArr.add(7);
+
+            rightArr.add(3);
+            rightArr.add(6);
+            rightArr.add(9);
+
             String answer = "";
+
+            for (int number : numbers) { // 반복해야하는 횟수
+                  if (leftArr.contains(number)) { //무조건 왼손으로 사용하는 경우 제거
+                        leftPos = number;
+                        resultArr.add("L");
+                  } else if (rightArr.contains(number)) { // 무조건 오른손으로 사용하는 경우 제거
+                        rightPos = number;
+                        resultArr.add("R");
+                  } else {
+                        for (int index = 0; index < keypad.size(); index++) {
+                              ArrayList<String> strArr = keypad.get(index);
+                              for (int index2 = 0; index2 < strArr.size(); index2++) {
+                                    String str = strArr.get(index2);
+                                    if (str.equals(Integer.toString(number))) { //숫자를 문자로 변환하고 해당 키패드의 값이 number값과 동일한지 검증
+                                          System.out.println("str = " + str);
+                                          distanceCalc(leftPos, rightPos, str);
+
+                                    }
+                              }
+                              System.out.println();
+                              System.out.println("======================================================");
+                        }
+                  }
+
+
+                  //생각하는 하는 분기점
+                  /*
+                   * 1. 현재 사용자의 손이 어떤 손인지!
+                   *           어떤 손인지에 따라서 거리가 같은 경우 어떠한 손을 사용해야하는 지에 대한 사고
+                   * 2. 현재 손의 위치를 기억해야합니다 (-1 만큼만)
+                   * 3.
+                   *
+                   * */
+            }
 
 
             return answer;
+      }
+
+      private void distanceCalc(int leftPos,int rightPos, String pushNum) {
+            int distance = 0;
+            System.out.println("leftPos = " + leftPos);
+            System.out.println("rightPos = " + rightPos);
+            System.out.println("pushNum = " + pushNum);
+            System.out.println("======================================================");
+
+
       }
 }
     
