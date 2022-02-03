@@ -98,19 +98,40 @@ class Solution7 {
                               ArrayList<String> strArr = keypad.get(index);
                               for (int index2 = 0; index2 < strArr.size(); index2++) {
                                     String str = strArr.get(index2);
-                                    if (str.equals(Integer.toString(number))) { //숫자를 문자로 변환하고 해당 키패드의 값이 number값과 동일한 지 검증
-                                          System.out.println("str = " + str);
 
-                                    }
-                                    if (leftPos.equals(str)) {
+                                    if (leftPos.equals(str)) { //왼손의 자리의 index를 저장합니다.
+                                          System.out.println("leftPos = " + leftPos);
                                           leftPosX = index;
                                           leftPosY = index2;
                                     }
-                                    if (rightPos.equals(str)) {
+                                    if (rightPos.equals(str)) { //오른손의 자리의 index를 저장합니다.
+                                          System.out.println("rightPos = " + rightPos);
                                           rightPosX = index;
                                           rightPosY = index2;
-
                                     }
+
+                                    if (str.equals(Integer.toString(number))) { //숫자를 문자로 변환하고 해당 키패드의 값이 number값과 동일한 지 검증.
+                                          System.out.println("str = " + str);
+                                          int leftDis = Math.abs(leftPosX - index) + Math.abs(leftPosY - index2);
+                                          int rightDis = Math.abs(rightPosX - index) + Math.abs(rightPosY - index2);
+
+                                          if (leftDis > rightDis) {
+
+                                          } else if (leftDis < rightDis) {
+
+                                          } else {
+                                                if (hand.equals("left")) {
+                                                      //주 손이 왼손이라면
+                                                      resultArr.add("L");
+                                                } else {
+                                                      // 주손이 오른손이라면
+                                                      resultArr.add("R");
+                                                }
+                                          }
+                                    }
+
+
+
                               }
                               System.out.println();
                               System.out.println("======================================================");
