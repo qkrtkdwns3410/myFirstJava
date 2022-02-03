@@ -19,8 +19,8 @@ import java.util.Arrays;
 
 public class KeypadPush {
       public static void main(String[] args) {
-            int[] numbers = {1, 3, 4, 5, 7, 2, 1, 4, 5, 9, 5,};
-            String hands = "right";
+            int[] numbers = {7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2};
+            String hands = "left";
 
             Solution7 solution7 = new Solution7();
             solution7.solution(numbers, hands);
@@ -28,7 +28,7 @@ public class KeypadPush {
 }
 
 class Solution7 {
-      public String solution(int[] numbers, String hand) {
+      public StringBuilder solution(int[] numbers, String hand) {
             System.out.println("numbers = " + Arrays.toString(numbers));
             System.out.println("hand = " + hand);
             System.out.println("======================================================");
@@ -50,8 +50,8 @@ class Solution7 {
 
             ArrayList<String> data4 = new ArrayList<>();
             data4.add("10");
-            data4.add("0");
             data4.add("11");
+            data4.add("12");
 
             ArrayList<ArrayList<String>> keypad = new ArrayList<>();
 
@@ -68,13 +68,9 @@ class Solution7 {
 
             ArrayList<String> resultArr = new ArrayList<>();
 
-            String leftPos = ""; // 왼손의 위치
-            int leftPosX = 0;
-            int leftPosY = 0;
+            String leftPos = "10"; // 왼손의 위치
 
-            String rightPos = ""; // 오른손의 위치
-            int rightPosX = 0;
-            int rightPosY = 0;
+            String rightPos = "12"; // 오른손의 위치
 
             leftArr.add(1);
             leftArr.add(4);
@@ -84,42 +80,55 @@ class Solution7 {
             rightArr.add(6);
             rightArr.add(9);
 
-            String answer = "";
 
             for (int number : numbers) { // 반복해야하는 횟수
                   if (leftArr.contains(number)) { //무조건 왼손으로 사용하는 경우 제거
                         leftPos = String.valueOf(number);
                         resultArr.add("L");
+                        System.out.println("무조건 왼손");
+                        System.out.println("resultArr = " + resultArr);
+                        System.out.println();
                   } else if (rightArr.contains(number)) { // 무조건 오른손으로 사용하는 경우 제거
                         rightPos = String.valueOf(number);
                         resultArr.add("R");
+                        System.out.println("무조건 오른손");
+                        System.out.println("resultArr = " + resultArr);
+                        System.out.println();
                   } else {
                         for (int index = 0; index < keypad.size(); index++) {
                               ArrayList<String> strArr = keypad.get(index);
                               for (int index2 = 0; index2 < strArr.size(); index2++) {
                                     String str = strArr.get(index2);
-
-                                    if (leftPos.equals(str)) { //왼손의 자리의 index를 저장합니다.
-                                          System.out.println("leftPos = " + leftPos);
-                                          leftPosX = index;
-                                          leftPosY = index2;
+                                    if (str =="11" ) {
+                                          str = "0";
                                     }
-                                    if (rightPos.equals(str)) { //오른손의 자리의 index를 저장합니다.
-                                          System.out.println("rightPos = " + rightPos);
-                                          rightPosX = index;
-                                          rightPosY = index2;
-                                    }
-
+                                    System.out.println("leftPos = " + leftPos); //8
+                                    System.out.println("rightPos = " + rightPos); //0
+                                    System.out.println("검증전");
+                                    System.out.println("resultArr = " + resultArr);
+                                    System.out.println();
                                     if (str.equals(Integer.toString(number))) { //숫자를 문자로 변환하고 해당 키패드의 값이 number값과 동일한 지 검증.
-                                          System.out.println("str = " + str);
-                                          int leftDis = Math.abs(leftPosX - index) + Math.abs(leftPosY - index2);
-                                          int rightDis = Math.abs(rightPosX - index) + Math.abs(rightPosY - index2);
+                                          System.out.println("검증 후");
+                                          System.out.println("str = " + str); //5
+                                          int leftDis = Math.abs((Integer.parseInt(leftPos) - 1) / 3 - index) + Math.abs((Integer.parseInt(leftPos) - 1) % 3 - index2);
+                                          int rightDis = Math.abs((Integer.parseInt(rightPos) - 1) / 3 - index) + Math.abs((Integer.parseInt(rightPos) - 1) % 3 - index2);
+
+                                          System.out.println("leftDis = " + leftDis);
+                                          System.out.println("rightDis = " + rightDis);
 
                                           if (leftDis > rightDis) {
-
+                                                rightPos = String.valueOf(number);
+                                                resultArr.add("R");
+                                                System.out.println("오른손으로");
+                                                System.out.println("resultArr = " + resultArr);
                                           } else if (leftDis < rightDis) {
+                                                leftPos = String.valueOf(number);
+                                                resultArr.add("L");
+                                                System.out.println("왼손으로");
+                                                System.out.println("resultArr = " + resultArr);
 
                                           } else {
+                                                System.out.println("주손 체크");
                                                 if (hand.equals("left")) {
                                                       //주 손이 왼손이라면
                                                       resultArr.add("L");
@@ -135,33 +144,21 @@ class Solution7 {
                               }
                               System.out.println();
                               System.out.println("======================================================");
+                              System.out.println("resultArr = " + resultArr);
                         }
                   }
 
 
-                  //브레인스토뮝
-                  /*
-                   * 1. 현재 사용자의 손이 어떤 손인지!
-                   *           어떤 손인지에 따라서 거리가 같은 경우 어떠한 손을 사용해야하는 지에 대한 사고
-                   * 2. 현재 손의 위치를 기억해야합니다 (-1 만큼만)
-                   * 3.
-                   *
-                   * */
             }
 
-
-            return answer;
+            StringBuilder sb = new StringBuilder();
+            for (String str : resultArr) {
+                  sb.append(str);
+            }
+            return sb;
       }
 
-      private void distanceCalc(int leftPos, int rightPos, String pushNum) {
-            int distance = 0;
-            System.out.println("leftPos = " + leftPos);
-            System.out.println("rightPos = " + rightPos);
-            System.out.println("pushNum = " + pushNum);
-            System.out.println("======================================================");
 
-
-      }
 }
     
     
