@@ -68,8 +68,13 @@ class Solution7 {
 
             ArrayList<String> resultArr = new ArrayList<>();
 
-            int leftPos = 0; // 왼손의 위치
-            int rightPos = 0; // 오른손의 위치
+            String leftPos = ""; // 왼손의 위치
+            int leftPosX = 0;
+            int leftPosY = 0;
+
+            String rightPos = ""; // 오른손의 위치
+            int rightPosX = 0;
+            int rightPosY = 0;
 
             leftArr.add(1);
             leftArr.add(4);
@@ -83,18 +88,27 @@ class Solution7 {
 
             for (int number : numbers) { // 반복해야하는 횟수
                   if (leftArr.contains(number)) { //무조건 왼손으로 사용하는 경우 제거
-                        leftPos = number;
+                        leftPos = String.valueOf(number);
                         resultArr.add("L");
                   } else if (rightArr.contains(number)) { // 무조건 오른손으로 사용하는 경우 제거
-                        rightPos = number;
+                        rightPos = String.valueOf(number);
                         resultArr.add("R");
                   } else {
                         for (int index = 0; index < keypad.size(); index++) {
                               ArrayList<String> strArr = keypad.get(index);
                               for (int index2 = 0; index2 < strArr.size(); index2++) {
                                     String str = strArr.get(index2);
-                                    if (str.equals(Integer.toString(number))) { //숫자를 문자로 변환하고 해당 키패드의 값이 number값과 동일한지 검증
+                                    if (str.equals(Integer.toString(number))) { //숫자를 문자로 변환하고 해당 키패드의 값이 number값과 동일한 지 검증
                                           System.out.println("str = " + str);
+
+                                    }
+                                    if (leftPos.equals(str)) {
+                                          leftPosX = index;
+                                          leftPosY = index2;
+                                    }
+                                    if (rightPos.equals(str)) {
+                                          rightPosX = index;
+                                          rightPosY = index2;
 
                                     }
                               }
@@ -118,14 +132,12 @@ class Solution7 {
             return answer;
       }
 
-      private void distanceCalc(int leftPos,int rightPos, String pushNum,) {
+      private void distanceCalc(int leftPos, int rightPos, String pushNum) {
             int distance = 0;
             System.out.println("leftPos = " + leftPos);
             System.out.println("rightPos = " + rightPos);
             System.out.println("pushNum = " + pushNum);
             System.out.println("======================================================");
-
-
 
 
       }

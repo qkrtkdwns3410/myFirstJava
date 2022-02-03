@@ -20,11 +20,10 @@ import java.util.regex.Pattern;
 public class ResidentRegistrationNumber {
       public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
-            Pattern birthExp = Pattern.compile(/^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/);
+//            Pattern birthExp = Pattern.compile(/^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/);
 
             System.out.print("생년월일을 입력해주세요 ( YYYY-MM-DD ) : ");
             String birthDate = sc.nextLine();
-            if()
       }
 }
 
