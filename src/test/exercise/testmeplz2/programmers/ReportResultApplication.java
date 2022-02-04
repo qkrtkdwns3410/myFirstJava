@@ -18,9 +18,9 @@ import java.util.*;
 
 public class ReportResultApplication {
       public static void main(String[] args) {
-            String[] id_list = {"con", "ryan"};
-            String[] report = {"ryan con", "ryan con", "ryan con", "ryan con"};
-            int k = 3;
+            String[] id_list = {"con", "ryan","jade"};
+            String[] report = {"ryan con", "ryan con", "ryan con", "ryan con","jade con","jade ryan","ryan jade","con jade","ryan jade"};
+            int k = 2;
 
             Solution solution = new Solution();
             solution.solution(id_list, report, k);
@@ -129,6 +129,7 @@ class Solution {
             }
 
             System.out.println("reportOverviewMap = " + reportOverviewMap);
+            System.out.println("answer = " + answer);
             return answer;
       }
 }

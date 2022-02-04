@@ -32,6 +32,13 @@ public class Util {
                   //  Handle any exceptions.
             }
       }
+      public boolean checkBackSlash(String checkBack) {
+            if (checkBack.equals("\\")) {
+                  System.out.println("메인으로 이동");
+                  return true;
+            }
+            return false;
+      }
 }
 
     

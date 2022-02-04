@@ -99,7 +99,7 @@ class Solution7 {
                               ArrayList<String> strArr = keypad.get(index);
                               for (int index2 = 0; index2 < strArr.size(); index2++) {
                                     String str = strArr.get(index2);
-                                    if (str =="11" ) {
+                                    if (str .equals("11") ) {
                                           str = "0";
                                     }
                                     System.out.println("leftPos = " + leftPos); //8
@@ -109,10 +109,15 @@ class Solution7 {
                                     System.out.println();
                                     if (str.equals(Integer.toString(number))) { //숫자를 문자로 변환하고 해당 키패드의 값이 number값과 동일한 지 검증.
                                           System.out.println("검증 후");
-                                          System.out.println("str = " + str); //5
-                                          int leftDis = Math.abs((Integer.parseInt(leftPos) - 1) / 3 - index) + Math.abs((Integer.parseInt(leftPos) - 1) % 3 - index2);
-                                          int rightDis = Math.abs((Integer.parseInt(rightPos) - 1) / 3 - index) + Math.abs((Integer.parseInt(rightPos) - 1) % 3 - index2);
-
+                                          System.out.println("str = " + str); //8
+                                          System.out.println("leftPos = " + leftPos);
+                                          System.out.println();
+                                          System.out.println("rightPos = " + rightPos);
+                                          if (number == 0) {
+                                                number = 11;
+                                          }
+                                          int leftDis = Math.abs((Integer.parseInt(leftPos) - 1) / 3 - ((number-1)/3)) + Math.abs((Integer.parseInt(leftPos) - 1) % 3 - ((number-1)%3));
+                                          int rightDis = Math.abs((Integer.parseInt(rightPos) - 1) / 3 - ((number-1)/3)) + Math.abs((Integer.parseInt(rightPos) - 1) % 3 - ((number-1)%3));
                                           System.out.println("leftDis = " + leftDis);
                                           System.out.println("rightDis = " + rightDis);
 
@@ -132,9 +137,13 @@ class Solution7 {
                                                 if (hand.equals("left")) {
                                                       //주 손이 왼손이라면
                                                       resultArr.add("L");
+                                                      leftPos = String.valueOf(number);
+                                                      System.out.println("leftPos = " + leftPos);
                                                 } else {
                                                       // 주손이 오른손이라면
                                                       resultArr.add("R");
+                                                      rightPos = String.valueOf(number);
+                                                      System.out.println("rightPos = " + rightPos);
                                                 }
                                           }
                                     }
@@ -155,6 +164,7 @@ class Solution7 {
             for (String str : resultArr) {
                   sb.append(str);
             }
+            System.out.println("sb = " + sb);
             return sb;
       }
 

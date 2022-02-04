@@ -342,6 +342,7 @@ public class ScoreManagementApplication {
                         return true;
                   }
                   ArrayList<ScoreVO> checkArr = studentList.get(numOfScoredSubject).getScoreList();
+
                   if (checkArr.size() != 0) {
                         System.out.println("이미 값이 존재합니다");
                         return true;
@@ -371,6 +372,8 @@ public class ScoreManagementApplication {
 
             } catch (NumberFormatException e) {
                   System.out.println("\n\n형식이 틀리거나 뒤로가기를 선택하셨습니다\n\n");
+            } catch (Exception e) {
+                  System.out.println();
             }
             return false;
       }
@@ -406,7 +409,6 @@ public class ScoreManagementApplication {
             try {
                   System.out.println();
                   System.out.println("현재 과목의 정보");
-                  System.out.println();
                   System.out.println("========================");
                   showSubjectInfo();
                   System.out.println("========================");
@@ -624,7 +626,6 @@ public class ScoreManagementApplication {
                   System.out.println();
 
                   System.out.println("현재 과목의 정보");
-                  System.out.println();
                   System.out.println("========================");
                   showSubjectInfo();
                   System.out.println("========================");
