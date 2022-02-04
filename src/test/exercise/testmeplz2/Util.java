@@ -34,7 +34,7 @@ public class Util {
       }
       public boolean checkBackSlash(String checkBack) {
             if (checkBack.equals("\\")) {
-                  System.out.println("메인으로 이동");
+                  System.out.println("뒤로 이동");
                   return true;
             }
             return false;
