@@ -31,10 +31,8 @@ public class MagicSquareApplication {
                   if (chaNum % 2 == 0) { //짝수인 경우
                         if (chaNum % 4 == 0) {
                               evenMagicSquareByFour(chaNum);
-
                         } else {
                               evenMagicSquareNotFour(chaNum);
-
                         }
 
                   } else {
@@ -154,40 +152,87 @@ public class MagicSquareApplication {
                  }
 
            }
+           for (int[][] ints : intArrList) {
+                 System.out.println("intArrList = " + Arrays.deepToString(ints));
+           }
+
+           int leftUpRow = 0;
+           int leftUpLine = 0;
+           int leftDownRow = 0;
+           int leftDownLine = 0;
+           int rightUpRow = 0;
+           int rightUpLine = 0;
+           int rightDownRow = 0;
+           int rightDownLine = 0;
 
            //4개의 마방진을 하나로 합칩니다
            for (int row = 0; row < chaNum; row++) {
-                 System.out.println("row = " + row);
                  for (int line = 0; line < chaNum; line++) {
-                       System.out.println("line = " + line);
 
                        if (row < chaNum / 2 && line < chaNum / 2) {
-                             System.out.println(1);
-                             System.out.println("line = " + line);
+                             magicSquare[row][line] = intArrList.get(0)[leftUpRow][leftUpLine];
 
-                             magicSquare[row][line] = intArrList.get(0)[row][line];
+                             leftUpLine++;
+                             if (leftUpLine >= chaNum / 2) {
+                                   leftUpLine = 0;
+                                   leftUpRow++;
+                                   if (leftUpRow >= chaNum / 2) {
+                                         break;
+                                   }
+                             }
+
                        } else if (row < chaNum / 2 && line >= chaNum / 2) {
-                             System.out.println(2);
-                             System.out.println("line = " + line);
 
-                             magicSquare[row][line] = intArrList.get(2)[row][line];
+                             magicSquare[row][line] = intArrList.get(2)[rightUpRow][rightUpLine];
+                             rightUpLine++;
+                             if (rightUpLine >= chaNum / 2) {
+                                   rightUpLine = 0;
+                                   rightUpRow++;
+                                   if (rightUpRow >= chaNum / 2) {
+                                         break;
+                                   }
+                             }
+
                        } else if (row >= chaNum / 2 && line < chaNum / 2) {
-                             System.out.println(3);
-                             System.out.println("line = " + line);
 
-                             magicSquare[row][line] = intArrList.get(1)[row][line];
+                             magicSquare[row][line] = intArrList.get(1)[leftDownRow][leftDownLine];
+                             leftDownLine++;
+                             if (leftDownLine >= chaNum / 2) {
+                                   leftDownLine = 0;
+                                   leftDownRow++;
+                                   if (leftDownRow >= chaNum / 2) {
+                                         break;
+                                   }
+                             }
+
                        } else {
-                             System.out.println(4);
-                             System.out.println("line = " + line);
 
-                             magicSquare[row][line] = intArrList.get(3)[row][line];
+                             magicSquare[row][line] = intArrList.get(3)[rightDownRow][rightDownLine];
+                             rightDownLine++;
+                             if (rightDownLine >= chaNum / 2) {
+                                   rightDownLine = 0;
+                                   rightDownRow++;
+                                   if (rightDownRow >= chaNum / 2) {
+                                         break;
+                                   }
+                             }
+
                        }
                  }
            }
-           System.out.println("magicSquare = " + Arrays.deepToString(magicSquare));
+           for (int row = 0; row < magicSquare.length; row++) {
+                 for (int line = 0; line < magicSquare[row].length; line++) {
+                       System.out.print(magicSquare[row][line]+" ");
+                 }
+                 System.out.println();
+           }
 
 
      }
+
+      private static void checkRowLine(int row, int line, int chaNum) {
+
+      }
 
       private static int[][] oddMagicSquare(int chaNum) {
             int[][] magicSquare = new int[chaNum][chaNum];
