@@ -1,7 +1,6 @@
 package test.exercise.testmeplz2.FebEx;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -23,11 +22,7 @@ public class MagicSquareApplication {
             Scanner sc = new Scanner(System.in);
             try {
 
-                  int chaNum = 14;
-
-                  //                  System.out.print("차수를 입력해주세요 : ");
-                  //                  int chaSrt = Integer.parseInt(sc.nextLine()); //차수를 입력받습니다
-
+                  int chaNum = Integer.parseInt(sc.nextLine());
                   if (chaNum % 2 == 0) { //짝수인 경우
                         if (chaNum % 4 == 0) {
                               evenMagicSquareByFour(chaNum);
@@ -36,7 +31,13 @@ public class MagicSquareApplication {
                         }
 
                   } else {
-                        oddMagicSquare(chaNum);
+                        int[][] magicSquare = oddMagicSquare(chaNum);
+                        for (int[] rowArr : magicSquare) {
+                              for (int rowArrValue : rowArr) {
+                                    System.out.print(rowArrValue + " ");
+                              }
+                              System.out.println();
+                        }
                   }
 
             } catch (NumberFormatException e) {
@@ -72,7 +73,6 @@ public class MagicSquareApplication {
                         reverseNum--;
                   }
             }
-            System.out.println("magicSquare = " + Arrays.deepToString(magicSquare));
             //1. 1~16 까지의 숫자를 차례대로 배열에 넣어줍니다
 
 
@@ -97,6 +97,7 @@ public class MagicSquareApplication {
            for (int row = 0; row < halfSizeNum; row++) {
                  for (int line = 0; line < halfSizeNum; line++) {
                        if (row == halfSizeNum / 2) { // 해당 4분된 마방진의 중간행의 경우 >>
+
                              if (line >= 1 && line <= (chaNum / 4)) { // 원사이즈의 4 나눈 열까지를 3으로 채우고 아래는 반대로 채웁니다
                                    leftUpArr[row][line] = 3 * chaNum * chaNum / 4;
                                    leftDownArr[row][line] = 0;
@@ -104,7 +105,8 @@ public class MagicSquareApplication {
                                    leftUpArr[row][line] = 0;
                                    leftDownArr[row][line] = 3 * chaNum * chaNum / 4;
                              }
-                       } else { //
+
+                       } else {
                              if (line < chaNum / 4) {
                                    leftUpArr[row][line] = 3 * chaNum * chaNum / 4;
                                    leftDownArr[row][line] = 0;
@@ -115,13 +117,11 @@ public class MagicSquareApplication {
                        }
                  }
            }
-           System.out.println("leftUpArr = " + Arrays.deepToString(leftUpArr));
-           System.out.println("leftDownArr = " + Arrays.deepToString(leftDownArr));
 
            //오른쪽 위의 마방진, 오른쪽 아래의 마방진
            for (int row = 0; row < halfSizeNum; row++) {
                  for (int line = 0; line < halfSizeNum; line++) {
-                       if (line >= chaNum / 4 - 1) {
+                       if (line >= halfSizeNum - (chaNum / 4 - 1)) {
                              rightUpArr[row][line] = 1 * chaNum * chaNum / 4;
                              rightDownArr[row][line] = 2 * chaNum * chaNum / 4;
                        } else {
@@ -130,8 +130,6 @@ public class MagicSquareApplication {
                        }
                  }
            }
-           System.out.println("rightUpArr = " + Arrays.deepToString(rightUpArr));
-           System.out.println("rightDownArr = " + Arrays.deepToString(rightDownArr));
 
 
            //모든 int 2차원 배열을 해당 ArrayList안에 담습니다
@@ -152,9 +150,7 @@ public class MagicSquareApplication {
                  }
 
            }
-           for (int[][] ints : intArrList) {
-                 System.out.println("intArrList = " + Arrays.deepToString(ints));
-           }
+
 
            int leftUpRow = 0;
            int leftUpLine = 0;
@@ -176,19 +172,18 @@ public class MagicSquareApplication {
                              if (leftUpLine >= chaNum / 2) {
                                    leftUpLine = 0;
                                    leftUpRow++;
-                                   if (leftUpRow >= chaNum / 2) {
+                                   if (leftUpRow > chaNum / 2) {
                                          break;
                                    }
                              }
 
                        } else if (row < chaNum / 2 && line >= chaNum / 2) {
-
                              magicSquare[row][line] = intArrList.get(2)[rightUpRow][rightUpLine];
                              rightUpLine++;
                              if (rightUpLine >= chaNum / 2) {
                                    rightUpLine = 0;
                                    rightUpRow++;
-                                   if (rightUpRow >= chaNum / 2) {
+                                   if (rightUpRow > chaNum / 2) {
                                          break;
                                    }
                              }
@@ -200,7 +195,7 @@ public class MagicSquareApplication {
                              if (leftDownLine >= chaNum / 2) {
                                    leftDownLine = 0;
                                    leftDownRow++;
-                                   if (leftDownRow >= chaNum / 2) {
+                                   if (leftDownRow > chaNum / 2) {
                                          break;
                                    }
                              }
@@ -212,7 +207,7 @@ public class MagicSquareApplication {
                              if (rightDownLine >= chaNum / 2) {
                                    rightDownLine = 0;
                                    rightDownRow++;
-                                   if (rightDownRow >= chaNum / 2) {
+                                   if (rightDownRow > chaNum / 2) {
                                          break;
                                    }
                              }
@@ -220,19 +215,16 @@ public class MagicSquareApplication {
                        }
                  }
            }
-           for (int row = 0; row < magicSquare.length; row++) {
-                 for (int line = 0; line < magicSquare[row].length; line++) {
-                       System.out.print(magicSquare[row][line]+" ");
+           for (int[] ints : magicSquare) {
+
+                 for (int anInt : ints) {
+                       System.out.print(anInt + " ");
                  }
                  System.out.println();
            }
 
 
      }
-
-      private static void checkRowLine(int row, int line, int chaNum) {
-
-      }
 
       private static int[][] oddMagicSquare(int chaNum) {
             int[][] magicSquare = new int[chaNum][chaNum];
@@ -267,12 +259,8 @@ public class MagicSquareApplication {
                         break; //숫자를 넘어가면 바로 종료됩니다
                   }
             }
-            for (int[] rowArr : magicSquare) {
-                  for (int rowArrValue : rowArr) {
-                        System.out.print(rowArrValue + " ");
-                  }
-                  System.out.println();
-            }
+
+
             return magicSquare;
       }
 }
