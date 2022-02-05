@@ -22,7 +22,7 @@ public class MagicSquareApplication {
             Scanner sc = new Scanner(System.in);
             try {
 
-                  int chaNum = 2;
+                  int chaNum = 4;
 
                   //                  System.out.print("차수를 입력해주세요 : ");
                   //                  int chaSrt = Integer.parseInt(sc.nextLine()); //차수를 입력받습니다
@@ -41,8 +41,12 @@ public class MagicSquareApplication {
 
                   }
 
+            } catch (NumberFormatException e) {
+                  System.out.println("올바른 형식으로 입력해주세요");
+                  System.out.println();
             } catch (Exception e) {
                   e.printStackTrace();
+                  System.out.println();
             }
 
       }
@@ -50,17 +54,21 @@ public class MagicSquareApplication {
       private static void evenMagicSquareByFour(int chaNum) {
             int[][] magicSquare = new int[chaNum][chaNum];
             int number = 1;
-            for (int row = 0; row <= magicSquare.length; row++) {
-                  for (int line = 0; line <= magicSquare[row].length; line++) {
+            for (int row = 0; row < magicSquare.length; row++) {
+                  for (int line = 0; line < magicSquare[row].length; line++) {
                         magicSquare[row][line] = number;
                         number++;
                   }
             }
             System.out.println("magicSquare = " + Arrays.deepToString(magicSquare));
+            //1. 1~16 까지의 숫자를 차례대로 배열에 넣어줍니다
+
+            //2. 순차적으로 채워진 마방진을 1:2:1로 나눕니다
+
 
       }
 
-      private static void evenMagicSquareNotFour(int chaNum) {
+     private static void evenMagicSquareNotFour(int chaNum) {
 
       }
 
