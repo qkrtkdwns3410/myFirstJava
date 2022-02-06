@@ -58,19 +58,27 @@ public class MagicSquareApplication {
 
             for (int row = 0; row < chaNum; row++) {
                   for (int line = 0; line < chaNum; line++) {
+
                         //마방진을 1:2:1 로 나누고 2부분에 해당하는 부분들만 원점 대칭으로 교환합니다
+
                         if ((chaNum / 4 > row && chaNum / 4 > line) || (chaNum / 4 > row && chaNum * 3 / 4 <= line) || (chaNum * 3 / 4 <= row && chaNum / 4 > line) || (chaNum * 3 / 4 <= row && chaNum * 3 / 4 <= line) || (chaNum / 4 <= row && chaNum * 3 / 4 > row && chaNum / 4 <= line && chaNum * 3 / 4 > line)) {
                               //정방향으로 숫자가 들어가는 영역입니다
                               magicSquare[row][line] = num;
+
                         } else {
                               magicSquare[row][line] = reverseNum;
+
                         }
+
                         System.out.print(magicSquare[row][line] + " ");
+
                         if (line == (chaNum - 1)) {
                               System.out.println();
                         }
+
                         num++;
                         reverseNum--;
+
                   }
             }
             //1. 1~16 까지의 숫자를 차례대로 배열에 넣어줍니다
@@ -96,7 +104,7 @@ public class MagicSquareApplication {
            //왼쪽 위의 마방진, 왼쪽 아래의 마방진
            for (int row = 0; row < halfSizeNum; row++) {
                  for (int line = 0; line < halfSizeNum; line++) {
-                       if (row == halfSizeNum / 2) { // 해당 4분된 마방진의 중간행의 경우 >>
+                       if (row == halfSizeNum / 2) { // 해당 4분된 마방진의 중간 행의 경우 >>
 
                              if (line >= 1 && line <= (chaNum / 4)) { // 원사이즈의 4 나눈 열까지를 3으로 채우고 아래는 반대로 채웁니다
                                    leftUpArr[row][line] = 3 * chaNum * chaNum / 4;

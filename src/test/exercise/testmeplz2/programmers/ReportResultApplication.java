@@ -29,13 +29,33 @@ public class ReportResultApplication {
 
 class Solution {
 
-      public ArrayList<Integer> solution(String[] id_list, String[] report, int k) {
+      public ArrayList<Integer> solution(String[] id_list, String[] reports, int k) {
             System.out.println("id_list = " + Arrays.toString(id_list));
-            System.out.println("report = " + Arrays.toString(report));
+            System.out.println("report = " + Arrays.toString(reports));
             System.out.println("k = " + k);
             System.out.println("======================================================");
-            report = Arrays.stream(report).distinct().toArray(String[]::new);
-            System.out.println("report = " + Arrays.toString(report));
+            /*원래의 방식입니다.*/
+            //            report = Arrays.stream(report).distinct().toArray(String[]::new);
+
+            /*Arrays 사용금지!?*/
+            /*  @SafeVarargs
+    @SuppressWarnings("varargs")
+    public static <T> List<T> asList(T... a) {
+        return new ArrayList<>(a);
+        --asList안의 구조.
+    }*/
+            List<String> tempList = new ArrayList<>();
+            for (String report : reports) {
+                  tempList.add(report);
+            }
+
+            /*배열의 중복값을 제거합니다 > LinkedHashSet으로 순서를 보장받고 중복값을 제거하고 > 원 배열로 전환합니다*/
+            LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>(tempList);
+
+            //linkedHashSet을 배열로 전환
+            reports = linkedHashSet.toArray(new String[0]);
+
+            System.out.println("report = " + Arrays.toString(reports));
             ArrayList<String> reporter = new ArrayList<>();
             ArrayList<String> reported = new ArrayList<>();
             ArrayList<Integer> answer = new ArrayList<>();
@@ -53,7 +73,7 @@ class Solution {
             }
             System.out.println("reportOverviewMap = " + reportOverviewMap);
 
-            for (String s : report) {
+            for (String s : reports) {
                   reporter.add(s.split(" ")[0]);
                   reported.add(s.split(" ")[1]);
             }

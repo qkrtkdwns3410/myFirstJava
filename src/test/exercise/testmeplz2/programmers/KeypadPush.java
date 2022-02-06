@@ -95,10 +95,10 @@ class Solution7 {
                         System.out.println("resultArr = " + resultArr);
                         System.out.println();
                   } else {
-                        for (int index = 0; index < keypad.size(); index++) {
-                              ArrayList<String> strArr = keypad.get(index);
-                              for (int index2 = 0; index2 < strArr.size(); index2++) {
-                                    String str = strArr.get(index2);
+                        for (int keypadIdx = 0; keypadIdx < keypad.size(); keypadIdx++) {
+                              ArrayList<String> strArr = keypad.get(keypadIdx);
+                              for (int valueIdx = 0; valueIdx < strArr.size(); valueIdx++) {
+                                    String str = strArr.get(valueIdx);
                                     if (str .equals("11") ) {
                                           str = "0";
                                     }

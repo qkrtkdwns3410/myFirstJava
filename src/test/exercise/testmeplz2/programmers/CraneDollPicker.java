@@ -34,26 +34,25 @@ class Solution6 {
             System.out.println("board = " + Arrays.deepToString(board));
             System.out.println("moves = " + Arrays.toString(moves));
             System.out.println("======================================================");
-            int movesCount = 0;
             Stack<Integer> resultStack = new Stack<>();
 
             for (int repeat = 0; repeat < moves.length; repeat++) { //반복횟수입니다.
                   int moveNum = moves[repeat] - 1;
-                  loop1 : for (int index = 0; index < board.length; index++) { // 보드의 층
-                        for (int index2 = 0; index2 < board[index].length; index2++) { //보드의 칸!
-                              int boardNum = board[index][index2];
+                  loop1 : for (int boardRow = 0; boardRow < board.length; boardRow++) { // 보드의 층
+                        for (int boardLine = 0; boardLine < board[boardRow].length; boardLine++) { //보드의 칸!
+                              int boardNum = board[boardRow][boardLine];
 
-                              if (index2 == moveNum && boardNum != 0) {
-                                    System.out.print(board[index][index2]);
-                                    System.out.println("index = " + index);
-                                    System.out.println("index2 = " + index2);
+                              if (boardLine == moveNum && boardNum != 0) {
+                                    System.out.print(board[boardRow][boardLine]);
+                                    System.out.println("index = " + boardRow);
+                                    System.out.println("index2 = " + boardLine);
                                     System.out.println("boardNum = " + boardNum);
                                     resultStack.push(boardNum);
 
-                                    board[index][index2] = 0;
+                                    board[boardRow][boardLine] = 0;
                                     System.out.println("resultStack = " + resultStack);
                                     if (resultStack.size() >= 2) {
-                                          if (resultStack.peek() == resultStack.get(resultStack.size() - 2)) {
+                                          if (resultStack.peek().equals(resultStack.get(resultStack.size() - 2))) {
                                                 System.out.println(resultStack.peek());
                                                 System.out.println(resultStack.get(resultStack.size() - 2));
                                                 resultStack.pop();

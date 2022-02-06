@@ -26,13 +26,16 @@ class Solution8 {
       public int solution(int[] absolutes, boolean[] signs) {
             int sum = 0;
 
-            for (int absolute : absolutes) {
-                  for (boolean sign : signs) {
-                        if (sign) {
-                              sum += absolute;
-                        } else {
-                              System.out.println("실행안돼?5");
-                              sum -= absolute;
+            for (int absIndex = 0; absIndex < absolutes.length; absIndex++) {
+                  int absolute = absolutes[absIndex];
+                  for (int signIndex = 0; signIndex < signs.length; signIndex++) {
+                        boolean sign = signs[signIndex];
+                        if (absIndex==signIndex) {
+                              if (sign) {
+                                    sum += absolute;
+                              } else {
+                                    sum -= absolute;
+                              }
                         }
                   }
             }
