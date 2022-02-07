@@ -1,4 +1,7 @@
-package test.exercise.testmeplz2;
+package test.exercise.testmeplz2.consolePrg;
+
+import java.math.BigDecimal;
+
 
 /**
  * packageName    : test.exercise.testmeplz2
@@ -16,9 +19,9 @@ package test.exercise.testmeplz2;
 public class ScoreVO {
       private int studentId; //학번
       private SubjectVO subject; //과목
-      private float point; //점수
+      private BigDecimal point; //점수
 
-      public ScoreVO(int studentId, SubjectVO subject, float point) {
+      public ScoreVO(int studentId, SubjectVO subject, BigDecimal point) {
             this.studentId = studentId;
             this.subject = subject;
             this.point = point;
@@ -40,11 +43,11 @@ public class ScoreVO {
             this.subject = subject;
       }
 
-      public float getPoint() {
+      public BigDecimal getPoint() {
             return point;
       }
 
-      public void setPoint(int point) {
+      public void setPoint(BigDecimal point) {
             this.point = point;
       }
 

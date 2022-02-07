@@ -1,10 +1,11 @@
-package test.exercise.testmeplz2;
+package test.exercise.testmeplz2.consolePrg;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import static test.exercise.testmeplz2.Util.clearConsole;
-import static test.exercise.testmeplz2.Util.sc;
+import static test.exercise.testmeplz2.consolePrg.Util.clearConsole;
+import static test.exercise.testmeplz2.consolePrg.Util.sc;
 
 
 /**
@@ -71,7 +72,8 @@ public class ScoreManagementApplication {
             System.out.println();
             for (int i = 0; i < studentList.size(); i++) {
                   StudentVO student = studentList.get(i);
-                  System.out.println(i + ". 학생 이름 : " + student.getStudentName()+"\n\t과목 이름 : "+student.getMajorSubject().getSubjectName()+"\n\t\t과목 번호 : "+student.getMajorSubject().getSubjectId());
+                  System.out.println(i + ". 학생 이름 : " + student.getStudentName() + "\n\t과목 이름 : " + student.getMajorSubject()
+                          .getSubjectName() + "\n\t\t과목 번호 : " + student.getMajorSubject().getSubjectId());
             }
             System.out.println();
 
@@ -86,7 +88,7 @@ public class ScoreManagementApplication {
 
             for (int i = 0; i < subjectList.size(); i++) {
                   SubjectVO subject = subjectList.get(i);
-                  System.out.println(i + ". 과목 이름 : " + subject.getSubjectName()+"\n\t과목 번호 : "+subject.getSubjectId()+"\n\t\t등급 : "+subject.getGradeTypeString());
+                  System.out.println(i + ". 과목 이름 : " + subject.getSubjectName() + "\n\t과목 번호 : " + subject.getSubjectId() + "\n\t\t등급 : " + subject.getGradeTypeString());
             }
 
             return subjectList.size() != 0;
@@ -172,7 +174,7 @@ public class ScoreManagementApplication {
                                           System.out.println("\n\n처음으로 이동\n\n");
                                           return;
                                     } catch (Exception e) {
-                                          e.printStackTrace();
+                                          System.out.println(e.getMessage());
                                     }
 
                               default:
@@ -292,9 +294,9 @@ public class ScoreManagementApplication {
 
 
             } catch (NumberFormatException e) {
-                  System.out.println("");
+                  System.out.println();
             } catch (Exception e) {
-                  e.printStackTrace();
+                  System.out.println(e.getMessage());
             }
             return true;
       }
@@ -341,11 +343,15 @@ public class ScoreManagementApplication {
                   if (checkBackSlashForInt(numOfScoredSubject)) {
                         return true;
                   }
-                  ArrayList<ScoreVO> checkArr = studentList.get(numOfScoredSubject).getScoreList();
 
-                  if (checkArr.size() != 0) {
-                        System.out.println("이미 값이 존재합니다");
-                        return true;
+                  ArrayList<ScoreVO> checkArr = studentList.get(numOfScoredStudent).getScoreList();
+
+                  for (ScoreVO score : checkArr) {
+                        int subjectId = score.getSubject().getSubjectId();
+                        if (subjectId == subjectList.get(numOfScoredSubject).getSubjectId()) {
+                              System.out.println("해당하는 과목의 성적이 존재합니다");
+                              return true;
+                        }
                   }
 
 
@@ -353,14 +359,14 @@ public class ScoreManagementApplication {
 
                   System.out.print("점수 입력 : ");
 
-                  float pointOfSubject = Float.parseFloat(sc.nextLine());
-
-                  if (checkBackSlashForInt(pointOfSubject)) {
+                  BigDecimal pointOfSubject = sc.nextBigDecimal();
+                  float floatPointOfSubject = pointOfSubject.floatValue();
+                  if (checkBackSlashForInt(floatPointOfSubject)) {
                         return true;
                   }
                   System.out.print("\n\n\n\n\n");
 
-                  if (pointOfSubject < 0 || pointOfSubject > 100) {
+                  if (floatPointOfSubject < 0 || floatPointOfSubject > 100) {
                         System.out.println("올바른 점수를 입력 부탁합니다!");
                         return true;
                   }
@@ -370,10 +376,15 @@ public class ScoreManagementApplication {
 
                   System.out.println("처리되었습니다.");
 
+            } catch (IndexOutOfBoundsException e) {
+                  System.out.println("해당 과목에는 번호가 없습니다.");
+
             } catch (NumberFormatException e) {
                   System.out.println("\n\n형식이 틀리거나 뒤로가기를 선택하셨습니다\n\n");
+
             } catch (Exception e) {
-                  System.out.println();
+                  System.out.println(e.getMessage());
+
             }
             return false;
       }
@@ -543,7 +554,7 @@ public class ScoreManagementApplication {
 
                   if (ScoreManagementApplication.getInstance().getSubjectList().size() <= changedMajorNum) {
                         System.out.println("======================================================");
-                        System.out.println("그런 번호는 없습니다만");
+                        System.out.println("해당하는 번호는 없습니다");
                         System.out.println("======================================================");
                         return true;
                   }
@@ -602,7 +613,7 @@ public class ScoreManagementApplication {
 
                   if (ScoreManagementApplication.getInstance().getSubjectList().size() <= getOne) {
                         System.out.println("======================================================");
-                        System.out.println("그런 번호는 없습니다만");
+                        System.out.println("해당하는 번호는 없습니다");
                         System.out.println("======================================================");
                         return true;
                   }
@@ -732,7 +743,7 @@ public class ScoreManagementApplication {
             }
       }
 
-      public void addScoreForStudent(StudentVO student, SubjectVO subject, float point) {
+      public void addScoreForStudent(StudentVO student, SubjectVO subject, BigDecimal point) {
 
             try {
 
@@ -777,7 +788,7 @@ public class ScoreManagementApplication {
                   student.removeSubjectScore(index);
                   subject.getStudentList().remove(index);
 
-                  addScoreForStudent(student, subject, point);
+                  addScoreForStudent(student, subject, BigDecimal.valueOf(point));
 
             } else {
                   System.out.println("처리 오류!");
@@ -862,7 +873,7 @@ public class ScoreManagementApplication {
                                     System.out.println("\n\n형식이 틀리거나 뒤로가기를 선택하셨습니다\n\n");
                                     System.out.println();
                               } catch (Exception e) {
-                                    e.printStackTrace();
+                                    System.out.println(e.getMessage());
                               }
                               break;
 

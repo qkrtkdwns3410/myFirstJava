@@ -1,4 +1,4 @@
-package test.exercise.testmeplz2;
+package test.exercise.testmeplz2.consolePrg;
 
 /**
  * packageName    : test.exercise.testmeplz2

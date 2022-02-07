@@ -19,7 +19,9 @@ import java.util.Scanner;
 
 public class MagicSquareApplication {
       public static void main(String[] args) {
+
             Scanner sc = new Scanner(System.in);
+
             while (true) {
                   try {
                         System.out.println("\t\t\n\n종료는 백슬래시입니다!");
@@ -28,18 +30,18 @@ public class MagicSquareApplication {
                         String chaNumStr = sc.nextLine();
                         checkBackSlash(chaNumStr);
                         int chaNum = Integer.parseInt(chaNumStr);
+
                         if (chaNum <= 2) {
                               System.out.println("\t\t 3이상의 차수를 입력해주세요!");
                               continue;
-
                         }
+
                         if (chaNum % 2 == 0) { //짝수인 경우
                               if (chaNum % 4 == 0) {
                                     evenMagicSquareByFour(chaNum);
                               } else {
                                     evenMagicSquareNotFour(chaNum);
                               }
-
                         } else {
                               int[][] magicSquare = oddMagicSquare(chaNum);
                               for (int[] rowArr : magicSquare) {
@@ -58,12 +60,11 @@ public class MagicSquareApplication {
                         System.out.println();
                   }
             }
-
       }
+
       private static void checkBackSlash(String checkBack) {
             if (checkBack.equals("\\")) {
                   System.exit(0); //프로그램의 종료
-
             }
       }
 
@@ -71,7 +72,6 @@ public class MagicSquareApplication {
             int[][] magicSquare = new int[chaNum][chaNum];
             int num = 1;
             int reverseNum = chaNum * chaNum;
-
 
             for (int row = 0; row < chaNum; row++) {
                   for (int line = 0; line < chaNum; line++) {
@@ -158,14 +158,12 @@ public class MagicSquareApplication {
                   }
             }
 
-
             //모든 int 2차원 배열을 해당 ArrayList안에 담습니다
             ArrayList<int[][]> intArrList = new ArrayList<>();
             intArrList.add(leftUpArr);
             intArrList.add(leftDownArr);
             intArrList.add(rightUpArr);
             intArrList.add(rightDownArr);
-
 
             //마방진의 값을 전부 합칩니다.
             for (int repeat = 0; repeat < 4; repeat++) { //4번 반복합니다
@@ -177,7 +175,6 @@ public class MagicSquareApplication {
                   }
 
             }
-
 
             int leftUpRow = 0;
             int leftUpLine = 0;

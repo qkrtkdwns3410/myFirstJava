@@ -36,9 +36,10 @@ class Solution6 {
             System.out.println("======================================================");
             Stack<Integer> resultStack = new Stack<>();
 
-            for (int repeat = 0; repeat < moves.length; repeat++) { //반복횟수입니다.
-                  int moveNum = moves[repeat] - 1;
-                  loop1 : for (int boardRow = 0; boardRow < board.length; boardRow++) { // 보드의 층
+            for (int move : moves) { //반복횟수입니다.
+                  int moveNum = move - 1;
+                  loop1:
+                  for (int boardRow = 0; boardRow < board.length; boardRow++) { // 보드의 층
                         for (int boardLine = 0; boardLine < board[boardRow].length; boardLine++) { //보드의 칸!
                               int boardNum = board[boardRow][boardLine];
 

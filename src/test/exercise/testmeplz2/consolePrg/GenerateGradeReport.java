@@ -1,4 +1,4 @@
-package test.exercise.testmeplz2;
+package test.exercise.testmeplz2.consolePrg;
 
 import test.exercise.testmeplz.Define;
 
@@ -24,10 +24,8 @@ public class GenerateGradeReport {
       public static final String HEADER = "이름 | 학번 | 점수(등급) \n";
       public static final String HEADER_FOR_STUDENT = "과목명 | 과목번호 | 점수(등급) \n";
       public static final String LINE = "--------------------------------------\n";
-
-      private ScoreManagementApplication school = ScoreManagementApplication.getInstance();
-
       private final StringBuffer buffer = new StringBuffer();
+      private final ScoreManagementApplication school = ScoreManagementApplication.getInstance();
 
       public String getReport() {
 
@@ -86,7 +84,7 @@ public class GenerateGradeReport {
                               grade = gradeEvaluations[Define.AB_TYPE].getGrade(score.getPoint());
                         }
 
-                        buffer.append(score.getPoint());
+                        buffer.append(String.format("%.2f", score.getPoint()));
                         buffer.append(" : ");
                         buffer.append(grade);
                         buffer.append(" | ");
@@ -138,7 +136,6 @@ public class GenerateGradeReport {
                   buffer.append(LINE);
             }
       }
-
 
 
 }

@@ -1,6 +1,6 @@
 package test.exercise.testmeplz2.FebEx;
 
-import test.exercise.testmeplz2.Util;
+import test.exercise.testmeplz2.consolePrg.Util;
 
 import java.util.Scanner;
 
@@ -66,6 +66,7 @@ class MainLogic {
 
                               int sumOfRegisterNumber = 0;
                               int count = 0;
+
                               for (int registerNumberOne = 0; registerNumberOne < registerNumberStrArr.length; registerNumberOne++) {
                                     String registerNumberOneStr = registerNumberStrArr[registerNumberOne];
 
@@ -81,6 +82,7 @@ class MainLogic {
                                           count++;
                                     }
                               }
+
                               if (sumOfRegisterNumber % 11 != 0) {
                                     System.out.println("\n\n\t\t올바르지 않은 주민번호입니다!\n\n");
                                     System.out.println();

@@ -1,4 +1,4 @@
-package test.exercise.testmeplz2;
+package test.exercise.testmeplz2.consolePrg;
 
 import java.util.Collections;
 import java.util.Map;

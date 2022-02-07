@@ -1,4 +1,7 @@
-package test.exercise.testmeplz2;
+package test.exercise.testmeplz2.consolePrg;
+
+import java.math.BigDecimal;
+
 
 /**
  * packageName    : test.exercise.testmeplz2
@@ -14,7 +17,7 @@ package test.exercise.testmeplz2;
 
 
 public interface GradeEvaluation {
-      public String getGrade(float point);
+      public String getGrade(BigDecimal point);
 }
 
     
