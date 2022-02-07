@@ -60,13 +60,11 @@ public class MagicSquareApplication {
             }
 
       }
-      private static boolean checkBackSlash(String checkBack) {
+      private static void checkBackSlash(String checkBack) {
             if (checkBack.equals("\\")) {
                   System.exit(0); //프로그램의 종료
 
-                  return true;
             }
-            return false;
       }
 
       private static void evenMagicSquareByFour(int chaNum) {
