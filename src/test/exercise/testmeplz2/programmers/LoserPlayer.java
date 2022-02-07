@@ -1,8 +1,5 @@
 package test.exercise.testmeplz2.programmers;
 
-import java.util.ArrayList;
-
-
 /**
  * packageName    : test.exercise.testmeplz2.programmers
  * fileName       : LoserPlayer
@@ -24,44 +21,60 @@ public class LoserPlayer {
       }
 
       public static String solution(String[] participant, String[] completion) {
-//            ArrayList<String> participantList = new ArrayList<>();
-//            ArrayList<String> completionList = new ArrayList<>();
-//
-//            for (String participantOne : participant) {
-//                  participantList.add(participantOne);
-//            }
-//            for (String completionOne : completion) {
-//                  completionList.add(completionOne);
-//            }
+            //            ArrayList<String> participantList = new ArrayList<>();
+            //            ArrayList<String> completionList = new ArrayList<>();
+            //
+            //            for (String participantOne : participant) {
+            //                  participantList.add(participantOne);
+            //            }
+            //            for (String completionOne : completion) {
+            //                  completionList.add(completionOne);
+            //            }
 
             String answer = "";
+            for (int partIndex = 0; partIndex < participant.length; partIndex++) {
+                  for (int comIndex = 0; comIndex < completion.length; comIndex++) {
 
+                  }
+            }
 
             return answer;
       }
 
       public static int compareStrings(String str, String str2) {
             int returnValue = 0;
-            while (returnValue == 0) {
+            int lengthCount = 0;
+            if (str.length() >= str2.length()) {
+                  lengthCount = str.length();
+            } else {
+                  lengthCount = str2.length();
+            }
+
+            while (lengthCount>0) {
                   for (int charIdx = 0; charIdx < str.length(); charIdx++) {
                         for (int charIdx2 = 0; charIdx2 < str2.length(); charIdx2++) {
-                              if (str.charAt(charIdx) > str2.charAt(charIdx2)) {
-                                    returnValue = 1;
+                              if (charIdx == charIdx2) {
+                                    if (str.charAt(charIdx) > str2.charAt(charIdx2)) {
+                                          returnValue = 1;
+                                          return returnValue;
 
-                              } else if (str.charAt(charIdx) < str2.charAt(charIdx2)) {
-                                    returnValue = -1;
+                                    } else if (str.charAt(charIdx) < str2.charAt(charIdx2)) {
+                                          returnValue = -1;
+                                          return returnValue;
 
-                              } else {
-                                    returnValue = 0;
+                                    }
                               }
-                              if (returnValue == 0) {
-                                    return returnValue;
-                              }
-
                         }
+                        lengthCount--;
                   }
             }
 
+
+            /*
+             * 양수 값이 나온다면 str의 값이 더 큰 경우입니다.
+             * 음수 값이 나온다면 str2의 값이 큰 경우입니다
+             *  0 이라면 str 과 str2 의 값이 동일한 경우입ㄴ.
+             * */
             return returnValue;
       }
 }
