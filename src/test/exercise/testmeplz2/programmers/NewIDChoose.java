@@ -59,9 +59,47 @@ class Solution3 {
             //3단계 ....을 . 으로
             //            new_id = new_id.replaceAll("[.]{2,}", ".");
             //            System.out.println("new_id = " + new_id);
+            int dotCount = 0;
 
-            //4단계
-            new_id = new_id.replaceFirst("^[.]|[.]$", "");
+            int idIndexStart = 0;
+            int idIndexEnd = 0;
+
+            String new_id_start = "";
+            String new_id_end = "";
+
+            for (int idIndex = 0; idIndex < new_id.length(); idIndex++) {
+                  char new_id_ch = new_id.charAt(idIndex);
+                  if (new_id_ch == '.') {
+                        dotCount++;
+                  } else {
+                        if (dotCount >= 2) {
+                              idIndexEnd = idIndex;
+                              new_id_start = new_id.substring(0, idIndexStart);
+                              new_id_end = new_id.substring(idIndexEnd - 1);
+
+                              new_id = new_id_start + new_id_end;
+                              //초기화
+                              new_id_start = "";
+                              new_id_end = "";
+
+                        }
+                        dotCount = 0;
+                        idIndexStart = idIndex;
+                  }
+            }
+            //결과 .ba.y.abcdefghijklm
+
+
+            //4단계 - 앞뒤의 점 제거
+            //            new_id = new_id.replaceFirst("^[.]|[.]$", "");
+
+            while (new_id.charAt(0) == '.' || new_id.charAt(new_id.length() - 1) == '.') {
+                  if (new_id.charAt(0) == '.') {
+                        new_id = new_id.substring(1);
+                  } else if (new_id.charAt(new_id.length() - 1) == '.') {
+                        new_id = new_id;
+                  }
+            }
             System.out.println("new_id = " + new_id);
 
             //5단계
@@ -70,7 +108,10 @@ class Solution3 {
 
             //6단계
             new_id = (new_id.length() >= 16) ? new_id.substring(0, 15) : new_id;
-            new_id = new_id.replaceAll("[.]$", "");
+            //            new_id = new_id.replaceAll("[.]$", "");
+            while (new_id.charAt(new_id.length() - 1) == '.') {
+                  new_id = new_id;
+            }
             System.out.println("new_id = " + new_id);
 
             //7단계
@@ -80,37 +121,6 @@ class Solution3 {
 
             System.out.println("new_id = " + new_id);
             return new_id;
-      }
-
-      public  String replaceAllU(String str, String a, String b) {
-            String result = null;
-            String tmpStr = str;
-
-            do {
-                  if (result != null) {
-                        tmpStr = result;
-                  }
-                  result = replaceFirstU(tmpStr, a, b);
-            } while (!result.equals(tmpStr));
-
-            return result;
-      }
-
-      public  String replaceFirstU(String str, String a, String b) {
-            String result = null;
-
-            int idx = 0;
-            int len = a.length();
-            int len2 = b.length();
-
-            int diffLens = len - len2;
-            idx = str.indexOf(a);
-
-            if (idx < 0) return str;
-
-            result = str.substring(0, idx) + b + str.substring(idx + len2 + diffLens);
-
-            return result;
       }
 
 
