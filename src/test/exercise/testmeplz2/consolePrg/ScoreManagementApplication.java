@@ -272,14 +272,17 @@ public class ScoreManagementApplication {
                   System.out.print("\n\n\n\n\n");
 
                   System.out.print("점수 입력 : ");
-                  float pointOfSubject2 = Float.parseFloat(sc.nextLine());
-                  if (checkBackSlashForInt(pointOfSubject2)) {
+
+                  BigDecimal pointOfSubject2 = sc.nextBigDecimal();
+                  sc.nextLine();
+                  float floatPointOfSubject2 = pointOfSubject2.floatValue();
+                  if (checkBackSlashForInt(floatPointOfSubject2)) {
                         return true;
                   }
 
                   System.out.print("\n\n\n\n\n");
 
-                  if (pointOfSubject2 < 0 || pointOfSubject2 > 100) {
+                  if (floatPointOfSubject2 < 0 || floatPointOfSubject2 > 100) {
                         System.out.println("0~100까지만..");
 
                         return true;
@@ -319,6 +322,7 @@ public class ScoreManagementApplication {
                   System.out.print("번호 입력 : ");
 
                   int numOfScoredStudent = Integer.parseInt(sc.nextLine());
+
                   if (checkBackSlashForInt(numOfScoredStudent)) {
                         return true;
                   }
@@ -360,6 +364,7 @@ public class ScoreManagementApplication {
                   System.out.print("점수 입력 : ");
 
                   BigDecimal pointOfSubject = sc.nextBigDecimal();
+                  sc.nextLine();
                   float floatPointOfSubject = pointOfSubject.floatValue();
                   if (checkBackSlashForInt(floatPointOfSubject)) {
                         return true;
@@ -775,7 +780,7 @@ public class ScoreManagementApplication {
 
       } // 삭제시 해당 학생도 삭제되는 메서드
 
-      public void modifyScoreForStudent(StudentVO student, SubjectVO subject, float point) {
+      public void modifyScoreForStudent(StudentVO student, SubjectVO subject, BigDecimal point) {
 
             int index = -1;
             for (int i = 0; i < subjectList.size(); i++) {
@@ -788,7 +793,7 @@ public class ScoreManagementApplication {
                   student.removeSubjectScore(index);
                   subject.getStudentList().remove(index);
 
-                  addScoreForStudent(student, subject, BigDecimal.valueOf(point));
+                  addScoreForStudent(student, subject, point);
 
             } else {
                   System.out.println("처리 오류!");

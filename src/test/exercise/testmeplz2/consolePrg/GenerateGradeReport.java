@@ -2,6 +2,7 @@ package test.exercise.testmeplz2.consolePrg;
 
 import test.exercise.testmeplz.Define;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 
@@ -83,8 +84,9 @@ public class GenerateGradeReport {
                         } else {
                               grade = gradeEvaluations[Define.AB_TYPE].getGrade(score.getPoint());
                         }
+                        System.out.println(score.getPoint());
 
-                        buffer.append(String.format("%.2f", score.getPoint()));
+                        buffer.append(score.getPoint().setScale(2, BigDecimal.ROUND_DOWN));
                         buffer.append(" : ");
                         buffer.append(grade);
                         buffer.append(" | ");
