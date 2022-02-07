@@ -52,10 +52,10 @@ class MainLogic {
                         System.out.print("주민등록번호를 입력해주세요 : ");
 
                         registerNumber = sc.nextLine();
-
+                        checkBackSlashForString(registerNumber);
                         if (!registerNumber.matches(registerExp)) {
                               //맞는 정규식인 경우
-                              System.out.println("\t\t올바르지 않은 형식입니다");
+                              System.out.println("\n\n\t\t올바르지 않은 형식입니다\n\n");
                               System.out.println();
                         } else if (registerNumber.equals("\\")) {
                               System.out.println("\t\t프로그램이 종료됩니다.");
@@ -82,10 +82,10 @@ class MainLogic {
                                     }
                               }
                               if (sumOfRegisterNumber % 11 != 0) {
-                                    System.out.println("\t\t올바르지 않은 주민번호입니다!");
+                                    System.out.println("\n\n\t\t올바르지 않은 주민번호입니다!\n\n");
                                     System.out.println();
                               } else {
-                                    System.out.println("\t\t올바른 주민번호입니다!");
+                                    System.out.println("\n\n\t\t올바른 주민번호입니다!\n\n");
                                     System.out.println();
                               }
 
@@ -93,6 +93,14 @@ class MainLogic {
                   } catch (Exception e) {
                         e.printStackTrace();
                   }
+            }
+      }
+
+      private void checkBackSlashForString(String modifiedSubjectName) {
+            if (modifiedSubjectName.equals("\\")) {
+                  System.out.println("\t\t\n\n종료\n\n");
+                  System.exit(0); ;
+
             }
       }
 }
