@@ -19,11 +19,13 @@ import java.util.Arrays;
 
 public class GymSuit {
       public static void main(String[] args) {
-            solution(2, new int[]{1}, new int[]{2});
+            solution(5, new int[]{2,4}, new int[]{3});
             System.out.println("======================================================");
-            solution(5, new int[]{2, 3, 4, 5}, new int[]{2, 4});
+
+            solution(5, new int[]{2,4}, new int[]{1,3,5});
             System.out.println("======================================================");
-            solution(5, new int[]{2, 4}, new int[]{1, 3, 5});
+
+            solution(5, new int[]{2,3}, new int[]{3,4});
 
       }
 
@@ -41,22 +43,50 @@ public class GymSuit {
             for (int k : lost) {
                   lostList.add(k);
             }
+
             for (int j : reserve) {
                   reserveList.add(j);
             }
 
-            int count = 0;
+            for (int index = 0; index < lostList.size()-1; index++) {
+                  for (int index2 = 1; index2 < lostList.size(); index2++) {
+                        if (lostList.get(index) > lostList.get(index2)) {
+                              int temp = lostList.get(index);
+                              int temp2 = lostList.get(index2);
+                              lostList.set(index, temp2);
+                              lostList.set(index2, temp);
+                        }
+                  }
+            }
 
+            for (int index = 0; index < reserveList.size()-1; index++) {
+                  for (int index2 = 1; index2 < reserveList.size(); index2++) {
+                        if (reserveList.get(index) > reserveList.get(index2)) {
+                              int temp = reserveList.get(index);
+                              int temp2 = reserveList.get(index2);
+
+                              reserveList.set(index, temp2);
+                              reserveList.set(index2, temp);
+                        }
+                  }
+            }
+
+            int count = 0;
             for (int lostListValue : lostList) {
                   for (int reserveIndex = 0; reserveIndex < reserveList.size(); reserveIndex++) {
                         int reserveListValue = reserveList.get(reserveIndex);
 
                         if (lostListValue == reserveListValue) {
                               System.out.println("체육복 여분을 가진 친구가 또 잃어버림;;");
-                              count++;
                               reserveList.remove(reserveIndex);
+                              System.out.println("reserveList = " + reserveList);
                               break;
                         }
+                  }
+            }
+            for (int lostListValue : lostList) {
+                  for (int reserveIndex = 0; reserveIndex < reserveList.size(); reserveIndex++) {
+                        int reserveListValue = reserveList.get(reserveIndex);
 
                         if ((lostListValue < n && lostListValue > 1) && (reserveListValue == lostListValue - 1 || reserveListValue == lostListValue + 1)) {// 해당 값을 n 보다 작고 1보다 커야 양옆이 자유로움.
                               System.out.println("lostListValue = " + lostListValue);
@@ -77,15 +107,17 @@ public class GymSuit {
                               break;
 
                         }
-
                   }
             }
+
             System.out.println("count = " + count);
             System.out.println("lostList = " + lostList);
             System.out.println("reserveList = " + reserveList);
 
             answer = count + (n - lostList.size());
+
             System.out.println("answer = " + answer);
+
             return answer;
       }
 }
