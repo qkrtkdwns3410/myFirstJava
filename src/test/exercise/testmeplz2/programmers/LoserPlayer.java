@@ -1,5 +1,8 @@
 package test.exercise.testmeplz2.programmers;
 
+import test.doit.Queue;
+
+
 /**
  * packageName    : test.exercise.testmeplz2.programmers
  * fileName       : LoserPlayer
@@ -33,9 +36,7 @@ public class LoserPlayer {
 
             String answer = "";
             for (int partIndex = 0; partIndex < participant.length; partIndex++) {
-                  for (int comIndex = 0; comIndex < completion.length; comIndex++) {
-
-                  }
+                  
             }
 
             return answer;
@@ -44,6 +45,7 @@ public class LoserPlayer {
       public static int compareStrings(String str, String str2) {
             int returnValue = 0;
             int lengthCount = 0;
+
             if (str.length() >= str2.length()) {
                   lengthCount = str.length();
             } else {
