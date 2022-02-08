@@ -1,7 +1,5 @@
 package test.exercise.testmeplz2.programmers;
 
-import javax.swing.text.html.ListView;
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,9 +21,9 @@ public class GymSuit {
       public static void main(String[] args) {
             solution(2, new int[]{1}, new int[]{2});
             System.out.println("======================================================");
-            solution(5, new int[]{2, 4}, new int[]{3});
+            solution(5, new int[]{2, 3, 4, 5}, new int[]{2, 4});
             System.out.println("======================================================");
-            solution(3, new int[]{3}, new int[]{1});
+            solution(5, new int[]{2, 4}, new int[]{1, 3, 5});
 
       }
 
@@ -49,11 +47,16 @@ public class GymSuit {
 
             int count = 0;
 
-            for (int lostIndex = 0; lostIndex < lostList.size(); lostIndex++) {
-                  int lostListValue = lostList.get(lostIndex);
+            for (int lostListValue : lostList) {
                   for (int reserveIndex = 0; reserveIndex < reserveList.size(); reserveIndex++) {
                         int reserveListValue = reserveList.get(reserveIndex);
 
+                        if (lostListValue == reserveListValue) {
+                              System.out.println("체육복 여분을 가진 친구가 또 잃어버림;;");
+                              count++;
+                              reserveList.remove(reserveIndex);
+                              break;
+                        }
 
                         if ((lostListValue < n && lostListValue > 1) && (reserveListValue == lostListValue - 1 || reserveListValue == lostListValue + 1)) {// 해당 값을 n 보다 작고 1보다 커야 양옆이 자유로움.
                               System.out.println("lostListValue = " + lostListValue);
