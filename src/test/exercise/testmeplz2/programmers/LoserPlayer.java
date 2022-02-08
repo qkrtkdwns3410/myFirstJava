@@ -1,8 +1,5 @@
 package test.exercise.testmeplz2.programmers;
 
-import test.doit.Queue;
-
-
 /**
  * packageName    : test.exercise.testmeplz2.programmers
  * fileName       : LoserPlayer
@@ -18,9 +15,9 @@ import test.doit.Queue;
 
 public class LoserPlayer {
       public static void main(String[] args) {
-            solution(new String[]{"leo", "kiki", "eden" }, new String[]{"eden", "kiki" });
-            solution(new String[]{"marina", "josipa", "nikola", "vinko", "filipa" }, new String[]{"josipa", "filipa", "marina", "nikola" });
-            solution(new String[]{"mislav", "stanko", "mislav", "ana" }, new String[]{"stanko", "ana", "mislav" });
+            solution(new String[]{"leo", "kiki", "eden"}, new String[]{"eden", "kiki"});
+            solution(new String[]{"marina", "josipa", "nikola", "vinko", "filipa"}, new String[]{"josipa", "filipa", "marina", "nikola"});
+            solution(new String[]{"mislav", "stanko", "mislav", "ana"}, new String[]{"stanko", "ana", "mislav"});
       }
 
       public static String solution(String[] participant, String[] completion) {
@@ -35,9 +32,26 @@ public class LoserPlayer {
             //            }
 
             String answer = "";
-            for (int partIndex = 0; partIndex < participant.length; partIndex++) {
-                  
+            for (int i = 0; i < participant.length; i++) {
+                  for (int partIndex = 0; partIndex < participant.length - 1; partIndex++) {
+                        int checkTrue = compareStrings(participant[partIndex], participant[partIndex + 1]);
+                        if (checkTrue == 1) {  // 1인 경우에는 앞 인덱스의 값이 더 큰 경우 입니다. a부터 정렬하려면... 뒤의 친구가 앞으로 와야겠음.
+
+                              String temp = "";
+
+                              temp = participant[partIndex];
+                              participant[partIndex + 1] = temp;
+                              participant[partIndex] = participant[partIndex + 1];
+
+                        } else if (checkTrue == -1) {
+
+                        } else {
+
+                        }
+
+                  }
             }
+
 
             return answer;
       }
@@ -52,7 +66,7 @@ public class LoserPlayer {
                   lengthCount = str2.length();
             }
 
-            while (lengthCount>0) {
+            while (lengthCount > 0) {
                   for (int charIdx = 0; charIdx < str.length(); charIdx++) {
                         for (int charIdx2 = 0; charIdx2 < str2.length(); charIdx2++) {
                               if (charIdx == charIdx2) {
