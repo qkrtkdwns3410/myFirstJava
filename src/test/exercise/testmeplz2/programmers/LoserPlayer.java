@@ -1,5 +1,8 @@
 package test.exercise.testmeplz2.programmers;
 
+import java.util.Arrays;
+
+
 /**
  * packageName    : test.exercise.testmeplz2.programmers
  * fileName       : LoserPlayer
@@ -21,36 +24,27 @@ public class LoserPlayer {
       }
 
       public static String solution(String[] participant, String[] completion) {
-            //            ArrayList<String> participantList = new ArrayList<>();
-            //            ArrayList<String> completionList = new ArrayList<>();
-            //
-            //            for (String participantOne : participant) {
-            //                  participantList.add(participantOne);
-            //            }
-            //            for (String completionOne : completion) {
-            //                  completionList.add(completionOne);
-            //            }
 
             String answer = "";
+            int partIndex = 0;
             for (int i = 0; i < participant.length; i++) {
-                  for (int partIndex = 0; partIndex < participant.length - 1; partIndex++) {
+
+                  for (partIndex = 0; partIndex < participant.length - 1; partIndex++) {
                         int checkTrue = compareStrings(participant[partIndex], participant[partIndex + 1]);
                         if (checkTrue == 1) {  // 1인 경우에는 앞 인덱스의 값이 더 큰 경우 입니다. a부터 정렬하려면... 뒤의 친구가 앞으로 와야겠음.
-
                               String temp = "";
 
                               temp = participant[partIndex];
-                              participant[partIndex + 1] = temp;
                               participant[partIndex] = participant[partIndex + 1];
-
-                        } else if (checkTrue == -1) {
-
-                        } else {
+                              participant[partIndex + 1] = temp;
 
                         }
 
                   }
+
+
             }
+            System.out.println("participant = " + Arrays.toString(participant));
 
 
             return answer;
@@ -62,14 +56,20 @@ public class LoserPlayer {
 
             if (str.length() >= str2.length()) {
                   lengthCount = str.length();
+
             } else {
                   lengthCount = str2.length();
+
             }
 
             while (lengthCount > 0) {
+
                   for (int charIdx = 0; charIdx < str.length(); charIdx++) {
+
                         for (int charIdx2 = 0; charIdx2 < str2.length(); charIdx2++) {
+
                               if (charIdx == charIdx2) {
+
                                     if (str.charAt(charIdx) > str2.charAt(charIdx2)) {
                                           returnValue = 1;
                                           return returnValue;
