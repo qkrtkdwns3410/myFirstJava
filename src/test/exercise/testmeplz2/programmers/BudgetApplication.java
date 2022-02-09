@@ -20,35 +20,50 @@ import java.util.Arrays;
 public class BudgetApplication {
       
       public static void main(String[] args) {
-      
+            
             solution(new int[]{1, 3, 2, 5, 4}, 9);
             System.out.println("======================================================");
             solution(new int[]{2, 2, 3, 3}, 10);
       }
-      public static int solution(int[] d, int budget) {
       
+      public static int solution(int[] d, int budget) {
+            
             System.out.println("d = " + Arrays.toString(d));
             System.out.println("budget = " + budget);
             System.out.println("======================================================");
             ArrayList<Integer> budgetList = new ArrayList<>();
-      
+            
             int answer = 0;
-      
+            
             for (int repeatIdx = 0; repeatIdx < d.length; repeatIdx++) {
                   budgetList.add(d[repeatIdx]);
             }
             System.out.println("budgetList = " + budgetList);
-      
+            
             quickSort(budgetList, 0, budgetList.size() - 1);
             System.out.println("budgetList = " + budgetList);
-      
-            for (int outerIdx = 0; outerIdx < budgetList.size() - 1; outerIdx++) {
-                  for (int innerIdx = outerIdx; innerIdx < budgetList.size(); innerIdx++) {
-                  
+            
+            int sum = 0;
+            int index = 0;
+            
+            while (sum <= budget) {
+                  if (index >= budgetList.size()) {
+                        System.out.println("index = " + index);
+                        break;
                   }
+                  sum += budgetList.get(index);
+                  if (sum > budget) {
+                        break;
+                  }
+                  System.out.println("sum = " + sum);
+               
+                  index += 1;
+               
             }
-            return answer;
+            System.out.println("index = " + index);
+            return index;
       }
+      
       public static void quickSort(ArrayList<Integer> data, int start, int end) {
             
             if (start >= end) {
