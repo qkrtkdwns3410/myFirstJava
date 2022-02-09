@@ -34,11 +34,13 @@ public class ThreeZinFlipOver {
       
             ArrayList<Integer> threeList = new ArrayList<>();
             ArrayList<Integer> threeListFliped = new ArrayList<>();
+            
             while (n >= 3) {
                   
                   threeList.add(n % 3);
                   n /= 3;
             }
+            
             threeList.add(n % 3);
             
             
