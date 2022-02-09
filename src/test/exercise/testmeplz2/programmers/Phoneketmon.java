@@ -1,6 +1,8 @@
 package test.exercise.testmeplz2.programmers;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 
 
 /**
@@ -19,13 +21,12 @@ import java.util.Arrays;
 public class Phoneketmon {
       
       public static void main(String[] args) {
-      
+            
             solution(new int[]{3, 1, 2, 3});
             System.out.println("======================================================");
             solution(new int[]{3, 3, 3, 2, 2, 4});
             System.out.println("======================================================");
             solution(new int[]{3, 3, 3, 2, 2, 2});
-            System.out.println("======================================================");
             
       }
       
@@ -33,10 +34,26 @@ public class Phoneketmon {
       
             System.out.println("nums = " + Arrays.toString(nums));
       
-            int answer = 0;
+            HashSet<Integer> monMap = new HashSet<>();
             
-            return answer;
+            for (int idx = 0; idx < nums.length; idx++) {
+                  monMap.add(nums[idx]);
+            }
+            System.out.println("monMap = " + monMap);
+            int choice = nums.length / 2;
+      
+            if (choice < monMap.size()) {
+                  System.out.println("choice = " + choice);
+                  return choice;
+            } else {
+                  System.out.println("monMap = " + monMap.size());
+                  return monMap.size();
+            }
+            
+           
+            
       }
+      
 }
 
     
