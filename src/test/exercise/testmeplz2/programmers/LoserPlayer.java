@@ -47,6 +47,7 @@ public class LoserPlayer {
 
             for (String participantOne : participant) {
                   System.out.println("participantOne = " + participantOne);
+
                   if (answerOverviewMap.get(participantOne) != null) {
                         int temp = answerOverviewMap.get(participantOne);
 
