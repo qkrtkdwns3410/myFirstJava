@@ -92,6 +92,7 @@ public class GymSuit {
                   }
                   System.out.println("people = " + people);
             }
+            
             System.out.println("answer = " + answer);
             return answer;
       }
