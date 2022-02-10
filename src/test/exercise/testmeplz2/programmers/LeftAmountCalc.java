@@ -19,6 +19,7 @@ public class LeftAmountCalc {
       
             solution(3, 20, 4);
             System.out.println("======================================================");
+            solution(2500, 1000000000, 2500);
       }
       
       public static long solution(int price, int money, int count) {
@@ -31,14 +32,14 @@ public class LeftAmountCalc {
             int priceFirst = price;
             long answer = -1;
       
-            int totalPrice = 0;
+            long totalPrice = 0;
             for (int repeat = 0; repeat < count; repeat += 1) {
                   totalPrice += price;
                   price +=priceFirst;
                   
             }
             System.out.println("totalPrice = " + totalPrice);
-            int diff = totalPrice - money;
+            long diff = totalPrice - money;
             answer = diff >= 0 ? diff : 0;
       
             System.out.println("answer = " + answer);
