@@ -47,20 +47,42 @@ public class DartGame {
             optionMap.put("#", "-");
             
             System.out.println("dartResult = " + dartResult);
-            ArrayList<String> calcList = new ArrayList<>();
             String[] strArr;
-            
-            strArr = dartResult.split("");
-            System.out.println("strArr = " + Arrays.toString(strArr));
+            ArrayList<String> strList = new ArrayList<>();
       
+            strArr = dartResult.split("");
             for (int count = 0; count < strArr.length; count += 1) {
-                  System.out.println("strArr = " + strArr[count]);
-                  if (in(strArr[count], "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) {
-                        System.out.println("같은 값이 있다..");
-                        System.out.println("그리고 숫자형입니다");
-                  
+                  strList.add(strArr[count]);
+            }
+            
+            System.out.println("strList = " + strList);
+      
+            for (int count = 0; count < strList.size()-1; count += 1) {
+                  if (strList.get(count).equals("1") && strList.get(count+1).equals("0")) {
+                        strList.set(count, "10");
+                        strList.remove(count + 1);
                   }
             }
+      
+            System.out.println("strList = " + strList);
+            ArrayList<ArrayList<String>> splitList = new ArrayList<>();
+            ArrayList<String> splitInnerList = new ArrayList<>();
+      
+            for (int splitCount = 0; splitCount < strList.size(); splitCount += 1) {
+                  splitInnerList.add(strList.get(splitCount));
+                  
+                  if (in(strList.get(splitCount), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) {
+                        splitList.add(splitInnerList);
+                        splitInnerList.clear();
+                        
+                        System.out.println("숫자값 포착");
+                        System.out.println("strList = " + strList.get(splitCount));
+                        
+                        splitInnerList.add(strList.get(splitCount));
+                        
+                  }
+            }
+            System.out.println("splitList = " + splitList);
             
             return 0;
       }

@@ -20,7 +20,7 @@ public class ThreeZinFlipOver {
       
       public static void main(String[] args) {
             
-            solution(100000000);
+            solution(45);
             System.out.println("======================================================");
             solution(3);
             

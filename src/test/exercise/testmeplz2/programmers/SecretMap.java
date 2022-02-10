@@ -57,8 +57,8 @@ public class SecretMap {
       
             ArrayList<Integer> remainderList = new ArrayList<>();
             
-            System.out.println();
-            System.out.println("num = " + num);
+//            System.out.println();
+//            System.out.println("5num = " + num);
             
             int remainder;
             
@@ -67,8 +67,7 @@ public class SecretMap {
                   remainderList.add(remainder); //나머지를 순차적으로 담습니다
                   
                   num /= 2;
-                  System.out.println("num = " + num);
-                  
+//                  System.out.println("num = " + num);
             }
             
             if (num < 2) {
@@ -80,7 +79,7 @@ public class SecretMap {
                   remainderList.add(0);
             }
       
-            System.out.println("remainderList = " + remainderList);
+//            System.out.println("remainderList = " + remainderList);
       
             StringBuilder forConcatStr = new StringBuilder();
             
@@ -91,6 +90,7 @@ public class SecretMap {
                         forConcatStr.append(" ");
                   }
             }
+            System.out.println("forConcatStr = " + forConcatStr);
             
             
             return forConcatStr;

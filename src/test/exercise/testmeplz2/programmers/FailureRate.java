@@ -64,23 +64,21 @@ public class FailureRate {
                         if (failureList.get(idx) != -1.0 && failureList.get(idx) > maxValue) {
                               maxValue = failureList.get(idx);
                               maxIdx = idx;
-                              
-                              
                         }
-                        
                   }
                   System.out.println("maxValue = " + maxValue); //0.5
                   System.out.println("maxIdx = " + maxIdx); // 2
-      
+                  
                   failureList.set(maxIdx, -1.0);
-                  while (answer.contains(maxIdx+1)) {
-                        
+                  
+                  while (answer.contains(maxIdx + 1)) {
                         maxIdx += 1;
                   }
+                  
                   answer.add(maxIdx + 1);
                   
                   System.out.println("failureList = " + failureList);
-      
+                  
                   maxValue = 0;
                   maxIdx = 0;
             }
