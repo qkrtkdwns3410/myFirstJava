@@ -57,25 +57,29 @@ public class FailureRate {
                   System.out.println();
             }
             System.out.println("failureList = " + failureList);
+            
             double maxValue = 0;
             int maxIdx = 0;
+            
             for (int idx2 = 0; idx2 < failureList.size(); idx2++) {
                   for (int idx = 0; idx < failureList.size(); idx++) {
-                        if (failureList.get(idx) != -1.0 && failureList.get(idx) > maxValue) {
-                              maxValue = failureList.get(idx);
-                              maxIdx = idx;
+                        if (failureList.get(idx) != -1.0 && failureList.get(idx) > maxValue) { // 이미 뺀 맥스 값을 -0.1 로 만들어주면서 해당 값은 비교하지 않습니다.
+                              maxValue = failureList.get(idx); // 해당 루프의 max값
+                              maxIdx = idx; // max값의 index
                         }
                   }
+                  
                   System.out.println("maxValue = " + maxValue); //0.5
                   System.out.println("maxIdx = " + maxIdx); // 2
                   
-                  failureList.set(maxIdx, -1.0);
+                  failureList.set(maxIdx, -1.0); // 맥스 값 추출한 후 maxIdx 에 -1.0 에 입력!
                   
-                  while (answer.contains(maxIdx + 1)) {
+                  while (answer.contains(maxIdx + 1)) { // answer의 마지막 인덱스에 값이 담기지 않았기에 그 값을 찾아서 넣어주는 반창고 입니다.
                         maxIdx += 1;
+                        System.out.println("answer = " + answer);
                   }
                   
-                  answer.add(maxIdx + 1);
+                  answer.add(maxIdx + 1); //maxIdx+1 값을 넣음으로 answer 마지막에 없는 idx 의 값이 들어갑니다 [4,1,2] >> [4,1,2,3] 이 됩니다.
                   
                   System.out.println("failureList = " + failureList);
                   
