@@ -1,5 +1,6 @@
 package test.exercise.testmeplz2.programmers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -25,19 +26,27 @@ public class LowestRectangle {
             solution(new int[][]{{10, 7}, {12, 3}, {8, 15}, {14, 7}, {5, 15}});
             System.out.println("======================================================");
             solution(new int[][]{{14, 4}, {19, 6}, {6, 16}, {18, 7}, {7, 11}});
+            
       }
       
       public static int solution(int[][] sizes) {
-      
             System.out.println("sizes = " + Arrays.deepToString(sizes));
+            ArrayList<Integer> firstNumList = new ArrayList<>();
+            ArrayList<Integer> lastNumList = new ArrayList<>();
       
             int answer = 0;
+      
+            for (int size = 0; size < sizes.length; size++) {
+                  firstNumList.add(sizes[size][0]);
+                  lastNumList.add(sizes[size][1]);
+            }
+            
+            
             
             
             
             return answer;
       }
-      
 }
 
     
