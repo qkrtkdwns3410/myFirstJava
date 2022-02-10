@@ -71,9 +71,16 @@ public class DartGame {
             for (int splitCount = 0; splitCount < strList.size(); splitCount += 1) {
                   splitInnerList.add(strList.get(splitCount));
                   
+                  System.out.println("splitInnerList Outer = " + splitInnerList);
+                  
                   if (in(strList.get(splitCount), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) {
                         splitList.add(splitInnerList);
+                        System.out.println("splitList = " + splitList);
+                        System.out.println("splitInnerList Inner = " + splitInnerList);
+      
                         splitInnerList.clear();
+      
+                        
                         
                         System.out.println("숫자값 포착");
                         System.out.println("strList = " + strList.get(splitCount));
@@ -81,6 +88,7 @@ public class DartGame {
                         splitInnerList.add(strList.get(splitCount));
                         
                   }
+                  System.out.println("splitList = " + splitList);
             }
             System.out.println("splitList = " + splitList);
             
