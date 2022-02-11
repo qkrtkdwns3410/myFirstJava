@@ -2,7 +2,6 @@ package test.exercise.testmeplz2.programmers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 
 /**
@@ -40,12 +39,6 @@ public class DartGame {
       
       public static int solution(String dartResult) {
             
-            HashMap<String, String> optionMap = new HashMap<>();
-            optionMap.put("S", "1");
-            optionMap.put("D", "2");
-            optionMap.put("T", "3");
-            optionMap.put("#", "-");
-            
             System.out.println("dartResult = " + dartResult);
             String[] strArr;
             ArrayList<String> strList = new ArrayList<>();
@@ -72,11 +65,14 @@ public class DartGame {
             //1 D 2 S 3 T *
             for (int splitCount = 0; splitCount < strList.size(); splitCount += 1) {
                   splitInnerList.add(strList.get(splitCount));
+                  
                   System.out.println("splitInnerList = " + splitInnerList);
+                  
                   if (splitCount == strList.size() - 1) {
                         splitList.add(splitInnerList);
                         System.out.println("splitList = " + splitList);
                   }
+                  
                   if (splitCount != 0 && in(strList.get(splitCount), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) {
                         System.out.println();
                         System.out.println("이거 정확하게 타는거 맞습니까????");
@@ -98,36 +94,74 @@ public class DartGame {
                   
             }
             
+            ArrayList<Integer> answerList = new ArrayList<>(); //점수를 담는 배열입니다.
+            
             //여기서 부터는 연산해야합니다
             for (int splitListIdx = 0; splitListIdx < splitList.size(); splitListIdx += 1) {
+                  
                   int powMe = Integer.parseInt(splitList.get(splitListIdx).get(0));
                   String powHowStr = splitList.get(splitListIdx).get(1);
+                  
+                  System.out.println("splitListIdx = " + splitListIdx);
+                  
                   int powHow = 0;
-      
+                  
                   switch (powHowStr) {
                         case "S":
                               powHow = 1;
+                              System.out.println("1 선택됨");
                               break;
+                        
                         case "D":
                               powHow = 2;
+                              System.out.println("2 선택됨");
                               break;
+                        
                         case "T":
                               powHow = 3;
+                              System.out.println("3 선택됨");
                               break;
+                        
                         default:
                               System.out.println("무언가 오류가 있습니다");
                               break;
                   }
-                  if (splitListIdx == 0) {
+                  int option = 1;
                   
-                  }
+                  
+                  System.out.println("powMe = " + powMe);
+                  System.out.println("powHow = " + powHow);
                   
                   int result = pow(powMe, powHow);
                   System.out.println("result = " + result);
                   
+                  if (splitList.get(splitListIdx).size() >= 3) {
+                        if (splitListIdx == 0) { //첫번쨰 * 라면 점수를 내 배열만
+                              if (splitList.get(splitListIdx).get(2).equals("*")) {
+                                    result *= 2;
+                              } else if (splitList.get(splitListIdx).get(2).equals("#")) {
+                                    option = -1;
+                              }
+                        } else { // 첫 번째의 idx 가 아니라면 전 배열과 내 배열의 값을 2배씩합니다.
+                              if (splitList.get(splitListIdx).get(2).equals("*")) {
+                                    answerList.set(splitListIdx - 1, answerList.get(splitListIdx - 1) * 2);
+                                    result *= 2;
+                              } else if (splitList.get(splitListIdx).get(2).equals("#")) {
+                                    option = -1;
+                              }
+                              
+                        }
+                  }
+                  
+                  result = result * option;
+                  answerList.add(result);
             }
-            
-            return 0;
+            System.out.println("answerList = " + answerList);
+            int answer = 0;
+            for (int ansIdx = 0; ansIdx < answerList.size(); ansIdx += 1) {
+                  answer += answerList.get(ansIdx);
+            }
+            return answer;
       }
       
       public static int pow(int num1, int num2) {
@@ -135,7 +169,7 @@ public class DartGame {
             System.out.println("num1 = " + num1);
             System.out.println("num2 = " + num2);
             
-            int result = 0;
+            int result = 1;
             
             for (int count = 0; count < num2; count += 1) {
                   result *= num1;
