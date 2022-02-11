@@ -1,6 +1,4 @@
-package test.exercise.testmeplz2.programmers;
-
-import java.util.Arrays;
+package test.exercise.testmeplz2.programmers.lv1;
 
 
 /**

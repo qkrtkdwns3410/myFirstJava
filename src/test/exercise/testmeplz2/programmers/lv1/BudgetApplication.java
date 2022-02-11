@@ -1,4 +1,4 @@
-package test.exercise.testmeplz2.programmers;
+package test.exercise.testmeplz2.programmers.lv1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,35 +71,35 @@ public class BudgetApplication {
             }
             
             int pivot = start; //피봇 기준점 왼쪽 작은 값 오른쪽 큰값으로 나누기위함입니다.
-            int i = start + 1;
-            int j = end;
+            int startPlus = start + 1;
+            int tempEnd = end;
             int temp;
             
-            while (i <= j) { // 엇갈릴 때 까지 반복 j가 i보다 크거나 같으면 while문 종료
+            while (startPlus <= tempEnd) { // 엇갈릴 때 까지 반복 j가 i보다 크거나 같으면 while문 종료
                   
-                  while (i <= end && data.get(i) <= data.get(pivot)) { // 피봇 값보다 큰 값을 만날 때 까지
-                        i++;
+                  while (startPlus <= end && data.get(startPlus) <= data.get(pivot)) { // 피봇 값보다 큰 값을 만날 때 까지
+                        startPlus++;
                   }
                   
-                  while (j > start && data.get(j) > data.get(pivot)) { // 피봇 값보다 작은 값을 만날 때 까지
-                        j--;
+                  while (tempEnd > start && data.get(tempEnd) > data.get(pivot)) { // 피봇 값보다 작은 값을 만날 때 까지
+                        tempEnd--;
                   }
                   
-                  if (i > j) { // 현재 엇갈린 상태라면
-                        temp = data.get(j);
-                        data.set(j, data.get(pivot));
+                  if (startPlus > tempEnd) { // 현재 엇갈린 상태라면
+                        temp = data.get(tempEnd);
+                        data.set(tempEnd, data.get(pivot));
                         data.set(pivot, temp);
                   } else {
-                        temp = data.get(i);
-                        data.set(i, data.get(j));
-                        data.set(j, temp);
+                        temp = data.get(startPlus);
+                        data.set(startPlus, data.get(tempEnd));
+                        data.set(tempEnd, temp);
                         
                   }
                   
             }
             
-            quickSort(data, start, j - 1);
-            quickSort(data, j + 1, end);
+            quickSort(data, start, tempEnd - 1);
+            quickSort(data, tempEnd + 1, end);
       }
       
 }
